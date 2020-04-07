@@ -1,0 +1,405 @@
+
+package MAIN;
+
+
+import java.io.*;
+
+import javax.xml.parsers.*;
+
+import org.apache.commons.cli.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import TADsSerie.*;
+import TADs.*;
+import EXCEPTION.*;
+
+
+
+
+
+
+
+public class Main {																					// MAIN
+
+	public static void main(String[] args) throws ParseException, IOException, ParserConfigurationException, SAXException, FullShow  {
+		
+		BufferedReader teclat = new BufferedReader(new InputStreamReader(System.in));	// llegir una entra da per teclat
+	
+		//Object Serie;
+																									
+		int dimServer=0, typeServer;				// especificar el tipus de serividor que farem servir i la capactiat maxima que tindra aquest servidor
+	
+																									// preguntar el tipus de llista dinamica o estatica
+		System.out.println("Indiqui el tipus de Gestio: 0 - 1 ");
+		System.out.println("\t 0 - LinkedList Dinamica:... ");
+		System.out.println("\t 1 - LinkedList Estatica:... ");
+		typeServer = Integer.parseInt(teclat.readLine());										
+		
+		//if(typeServer==1)	// farem servir la implementacio statica / dinamica	
+		//{
+			System.out.println("indiqui el tamany del servidor");
+	//		dimServer = Integer.parseInt(teclat.readLine());	// llegir dimserver per teclat
+			dimServer = 101;
+			System.out.println("tamany de servidor: "+dimServer);
+		//}
+			
+		//	crear una instancia de show manager.
+			
+			
+		/*********************************************
+		 *  crear
+		 * 			nova
+		 * 					instancia
+		 * 								de
+		 * 										serie
+		 * *******************************************/	
+		
+		
+		System.out.print("\n");
+		
+	/*************************************************************************************/	
+		
+		
+// ara en el lloc de llegir una serie, llegim un conjunt de series els guardarem en l'estructura showmanager		
+		
+		String fileName = "xml/Data.xml";	// fitxer de dades d'entrada
+		
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+																												// legirlo tot lo fitxer xml i carregar lo a l'estructura
+		
+		/**************************************************************
+		 * Read XML file
+		 *
+		 *
+		 *
+		 *
+		 *
+		 **************************************************************/ 
+		// cal modificarlo perque 
+		// en primer lloc recorri tots els del nivell serie
+		// i despres episodis de cada serie
+	 
+		/****************************************************/
+		// CREAR INSTANCIA DE SHOW MANAGER	
+		/****************************************************/
+
+		// opcions de comparar dos objectes entre si...
+		//1 sobreescriure la classe equals 
+		//2 comparable o comparator java
+	
+		//ShowManager Gestor = new ShowManager(dimServer, typeServer);	
+		// inicialitzar servidor amb capasitat de dimServer series
+		ShowManager Gestor = new ShowManager(dimServer, 1);	
+		
+		
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		
+		// input list of the serie
+		File file = new File(fileName);
+		
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		
+		Document document = builder.parse(file);
+				
+	// Return ed element of XML file.
+		Element ed = document.getDocumentElement();
+
+				String aux, idActual =  new String();
+					Element auxElement;
+					
+					
+					
+		// determinar el nombre total de series... per la implementacio dinamica
+NodeList series = ed.getElementsByTagName("serie");
+		int numS =series.getLength();
+		
+			System.out.println("\t"+numS+"<---> TOTAL DE SERIES ");
+		
+	do{	// llegir n series		
+		numS--;			
+// declaracion de NODES
+		NodeList serieId, serieTitol, serienumepisodis, episodiList;
+	
+		// especification of the serie
+		
+		
+																											// determinar id de la serie
+				serieId 	= ed.getElementsByTagName("id");
+		
+								auxElement = (Element) serieId.item(0);
+								aux = auxElement.getFirstChild().getNodeValue();
+								System.out.println("S-id \t\t"+aux);
+								idActual = aux;
+																											// determinar titol de la serie	
+				serieTitol 	= ed.getElementsByTagName("titol");
+				
+								auxElement = (Element) serieTitol.item(0);
+								aux = auxElement.getFirstChild().getNodeValue();
+								System.out.println("S-titol \t"+aux);
+	
+									
+									/************************************************/
+									/***************************************************/
+									/********************************************************/
+									// crear tipus de llista segons especificacio
+									// para usar uno o otro...	selecionar comentario...
+									//	if(typeServer==1)
+									
+									
+									
+	ShowNO Serie; 
+	/****************************************************/
+	// CREAR INSTANCIA DE SERIE	
+	/****************************************************/
+	
+	
+	
+
+		// determinar num episodi previst
+		serienumepisodis = ed.getElementsByTagName("numepisodis");
+			auxElement = (Element) serienumepisodis.item(0);
+				aux = auxElement.getFirstChild().getNodeValue();
+				System.out.println("S-nepi \t\t"+aux);	
+
+	Serie = new ShowNO(aux, Integer.parseInt(aux));	// pasant li per parametre el nom de la series i el tamany
+				
+	
+/********************************************* * *******************************************/		
+		
+		
+
+		
+		// episodi
+		episodiList = ed.getElementsByTagName("episodi");
+		
+		
+	if(episodiList != null && episodiList.getLength() > 0) 
+			{
+			
+			
+			System.out.println("Hello");
+			
+			/********* bucle crear instaancias de episodios de la serie*********/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	for (int i=0; i<Integer.parseInt(aux); i++)						// recorrer tota la llista d'episodis de la serie
+			
+				{
+		
+		System.out.println(episodiList.getLength()+"   "+ i);	// System.out.println(i+1);
+		//String auxxxx = teclat.readLine();
+				Element episodi = (Element) episodiList.item(i);
+				
+		// id	
+				String id = new String();
+				NodeList idList = episodi.getElementsByTagName("id");
+				if(idList != null){
+					Element idElement = (Element)idList.item(0);
+					id = idElement.getFirstChild().getNodeValue();
+				}
+				
+				
+				//System.out.println(id);
+				
+				
+		// titol		
+				
+				String titol = new String();
+				NodeList titolList = episodi.getElementsByTagName("titol");
+				if(titolList != null){
+					Element titolElement = (Element)titolList.item(0);
+					titol = titolElement.getFirstChild().getNodeValue();
+				}
+				
+				
+				//System.out.println(titol);
+				
+		// season		
+				
+				String temporada = new String();
+				NodeList temporadaList = episodi.getElementsByTagName("temporada");
+				if(temporadaList != null){
+					Element temporadaElement = (Element)temporadaList.item(0);
+					temporada = temporadaElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(temporada);
+				
+		// episode
+				
+				String episode = new String();
+				NodeList episodeList = episodi.getElementsByTagName("capitol");
+				if(episodeList != null){
+					Element episodeElement = (Element)episodeList.item(0);
+					episode = episodeElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(episode);
+				
+				
+				
+		// date
+				String data = new String();
+				NodeList dataList = episodi.getElementsByTagName("data");
+				if(dataList != null){
+					Element dataElement = (Element)dataList.item(0);
+					data = dataElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(data);
+				
+				
+		// rating
+				
+				String rating = new String();
+				NodeList ratingList = episodi.getElementsByTagName("rating");
+				if(ratingList != null){
+					Element ratingElement = (Element)ratingList.item(0);
+					rating = ratingElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(rating);
+				
+		// url
+				
+				String url = new String();
+				NodeList urlList = episodi.getElementsByTagName("url");
+				if(urlList != null){
+					Element urlElement = (Element)urlList.item(0);
+					url = urlElement.getFirstChild().getNodeValue();
+				}
+				
+				// crear nova instancia de episodi
+				/************************************************
+				 * crear
+				 * 			nova
+				 * 					instancia
+				 * 								de 
+				 * 										episodi
+				 *********************************
+				 *
+				 *
+				 ****************/
+				
+				//System.out.println(url);
+				Episode epi = new Episode(Integer.parseInt(id), titol, Integer.parseInt(temporada), Integer.parseInt(episode), data, Float.parseFloat(rating) , url);
+				
+				// lo anterior codi massa repeitiu -
+				// insertar episodi a la serie
+				
+				if(Serie.addEpisode(epi))				// afegir episodi a la serie
+					System.out.println("si");
+				else
+					System.out.println("no");
+				
+				
+				
+
+			}
+			System.out.println("finish curl "); // iteracio nº i
+			
+			// cara caldria insertar la serie que acabem de crear a la llista de Showmanager
+			Gestor.addShow(Serie,idActual );		// afegir una serie a l'estructura
+			
+		}
+		
+		System.out.println("finish reading "); // final bucle for
+	
+	}while (numS!=0);
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+																										// INTERFACE
+		
+	System.out.println("initializing interface... ");
+	
+	int opcio = 0;	
+	System.out.printf("opcio: "+opcio);
+		
+		
+		
+		
+
+	
+	System.out.println("finish execution ");
+	
+	
+	String asdf = teclat.readLine();
+	
+}
+	
+
+
+
+
+
+
+public void menu_principal(){
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

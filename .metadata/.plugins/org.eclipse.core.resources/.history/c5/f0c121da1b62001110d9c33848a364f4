@@ -1,0 +1,21 @@
+
+public interface EspecShow {
+	
+	// operacions constructores
+	boolean addEpisode(Episode epis);
+	
+	
+	// operacions consultores
+	int[] getEpisodeCodes();
+	Episode getEpisode(int codi);
+	int[] EpisodeCodesSeason(int tempo);
+	
+	
+	
+	
+	boolean EpiTrobat(Episode epis);
+	
+	
+	
+	
+}

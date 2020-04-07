@@ -1,0 +1,21 @@
+import Exceptions.*;
+
+public interface EspecShow {
+	
+	// operacions constructores
+	boolean addEpisode(Episode epis) throws FullShow, OtherWarning;
+	
+	
+	// operacions consultores
+	int[] getEpisodeCodes() throws VoidSearch, OtherWarning;
+	Episode getEpisode(int codi) throws VoidSearch;
+	int[] EpisodeCodesSeason(int tempo) throws VoidSearch;
+	
+	
+	// operacions auxiliars
+	boolean EpiTrobat(Episode epis);
+	
+	
+	
+	
+}

@@ -1,0 +1,18 @@
+package TADs;
+
+import java.util.Vector;
+
+
+
+public interface EspecLinkedList<Elem, Code> {		// es un tipus de llista doblement enllaçada
+	
+	// operacions constructores
+	boolean addElement(Code code, Elem nou);		// afegir un element a la llista
+	boolean removeElement(Code code);				// esborrar un element concret de la llista
+	// operacions consultores
+	Elem getLast();									// determina el ultim afegit
+	boolean isEmpty();								// determina si la llista es buida
+	Elem getElement(Code code);						// retorna un element concret
+	//Vector<Node<Elem, Code>> getElements();		// retorna tots els elements de la llista	// aplica java.util.vector
+	int getNumElements(); 							// retorna el nombre d'elements que hiha a la llista	
+}

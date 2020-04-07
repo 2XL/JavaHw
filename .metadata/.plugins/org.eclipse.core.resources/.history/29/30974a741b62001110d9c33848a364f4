@@ -1,0 +1,78 @@
+
+public abstract class AbsShow implements EspecShow {
+	protected String title;			// titol de la serie
+	protected Episode epi[];			// array d'episodis
+	protected int numActual;			// numero de episodis actual == num d'elements
+	protected int numMax;				// tamany maxim del servidor
+	protected boolean ple;
+	
+	
+// operacions constructores	
+	// SETTER
+	
+	public abstract boolean addEpisode(Episode epis);
+	
+	
+	
+// operacions consultores	
+	public int[] getEpisodeCodes()
+	{
+		int i;
+		int llista[] = new int[numActual];
+		if(numActual != 0){
+			for(i=0; i<numActual; i++){
+				llista[i]=epi[i].getCode();
+			}
+		}
+		return(llista);
+	}
+	
+	
+	public Episode getEpisode(int codi) // retorna episodi amb la id facilitat
+	{
+		int i;
+		for(i=0; i<numActual; i++){
+			if(epi[i].getCode()==codi)
+				return(epi[i]);
+		}
+		return(null);	// crear un error
+	}					// exception
+	
+	public int[] EpisodeCodesSeason(int tempo)
+	{
+		int i=0,j=0;
+		int llista[]= new int [numActual];
+		for(i=0;i <numActual; i++){
+			if(epi[i].getSeason()==tempo)
+			{
+				llista[j]=epi[i].getCode();
+				j++;
+			}
+		}
+		int x=0;
+		
+		int[] losa = new int [j];
+	x=0;
+		while(x<losa.length){
+		losa[x] = llista[x];
+		x++;}
+		return(losa);
+	}
+	
+	// operacions auxiliars
+	public boolean EpiTrobat(Episode epis){
+		int i = 0;
+		// comprovar el codi de barres id si existeix ...
+		while(i!=numActual)
+				if(epi[i].getCode() != epis.getCode())
+					i++;
+				else
+					return (true);
+		return false;
+	}
+	
+	
+	
+	
+
+}

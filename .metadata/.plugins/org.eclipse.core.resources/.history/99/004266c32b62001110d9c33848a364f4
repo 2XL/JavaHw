@@ -1,0 +1,12 @@
+import Exceptions.FullShow;
+
+
+public class ShowList extends AbsShow {
+
+	
+	public boolean addEpisode(Episode epis) throws FullShow {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

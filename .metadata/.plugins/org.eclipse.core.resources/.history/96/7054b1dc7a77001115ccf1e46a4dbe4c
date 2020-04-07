@@ -1,0 +1,17 @@
+package TADs;
+
+public class NodeLinker {
+
+	//Node<Code, Element>
+	
+	// implementacio estatica o dinamica
+	// estatica ==  seran dos enters
+	// dinamica ==  dos punters
+	
+// 
+	
+	
+	
+	
+	
+}

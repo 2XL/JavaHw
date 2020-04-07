@@ -1,0 +1,219 @@
+package TADsHash;
+
+//import java.util.Vector;
+
+import java.util.Vector;
+
+import TADsGeneric.*;
+
+public class HashTable< Elem, Code>{	// taula de hashing genèric
+//						hash code - user - Linkedlist dinamic
+
+	// ATRIBUTS
+	
+	int dimT;	// mida maxima del taulell es a dir la taula de hashing
+	int numU;	// numero de usuaris que hiha
+	Vector<LinkedListD<Elem, Code>> T;
+
+	
+	
+	// CONSTRUCTOR
+	public HashTable (int mida)
+	{
+		// crea una estructura de hash table, sense cap element
+		Vector<LinkedListD<Elem, Code>> T = new Vector<LinkedListD<Elem, Code>>(mida);	// vector amb mida!
+		for(int i=0;i<mida;i++)
+		{
+			//T.elementAt(i) = new LinkedListD<Elem, Code>(mida);
+			T.insertElementAt(new LinkedListD<Elem, Code>(mida), i);
+		}
+				// amb la mida d'elements que li passem per parametre
+		dimT = mida;
+		numU = 0;	// num usuari
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	public void addElement( Code clau, Elem ele)// afegir usuari amb el codi 
+	{
+		int c;
+		// cridar la funcio de hash
+		c = HashFuntion(clau, dimT);	// tenir la clau
+		
+		System.out.println("HASH CODE ->"+c);
+		// es buida o ocupada?
+		T.elementAt(1).addElement(clau, ele);// obtenim el node de la taula
+		numU++;
+		// afegeix un nou element a la taula en el lloc que li pertoca segons la funcio de hash
+		// cal comprovar si l'element existia
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	public void removeElement(Code clau)
+	{
+		int c;
+		// cridar la funcio de hash
+		c = HashFuntion(clau, dimT);	// tenir la clau
+		
+		// es buida o ocupada?
+		T.elementAt(c).removeElement(clau);// obtenim el node de la taula
+		numU--;
+		// aquesta operacio elimina de la taula l'element identificat per la clau que passem per parametre.
+		// dona error si l'element que esborrem no es troba a la llista
+	}
+	
+	
+	// CONSULTORES
+	public boolean isEmpty()
+	{
+		// retorna false si hiha algun element a la taula 
+		return numU==0;
+	}
+	
+	public void getElement()
+	{
+		// aquesta, retorna l'element corresponent a la clau que passem com a parametre.
+		// dona error, si no hi ha cap element identificadt per la clau.
+		
+	}
+	
+	public String[] getClaus()
+	{
+		// retorna una llista amb totes les claus que hi ha a la taula.
+		// dona error si no hih a cap clau.
+		String[] claus = null;
+		return claus;
+	}
+	
+	public float getLoadFactor()
+	{
+		// retorna el factor de carrega =
+		// numero d'elements/ capacitat del sistema.
+		return numU/dimT;
+	}
+	
+	
+	
+	public int HashFuntion(Code correo, int midamax)
+	{
+		correo.hashCode();
+		/*
+			int clau=(correo.length() * (int)correo.charAt(0)); 
+			int mida;
+			mida = correo.length();
+			for (int i=0; i<mida; i++)
+			{		clau = clau % midamax;
+					clau = (i^3) + (clau*correo.charAt(i)) ;
+			}
+			
+		*/
+			return correo.hashCode()%midamax;
+	}
+	
+	
+	
+	
+	
+	
+	/*
+	 
+	  public class HashFunc {
+// implementar la funcio de hashing...
+	// no encadenada
+	// encadenada directa
+	// encadenada indirecta
+	
+	
+	
+// preferencia?
+	
+	// tractament de la clau?¿
+	
+		// suposu que sera passar de String a integer... 
+		 * aprofitar la funcio hashcode()
+		// aprofitar el codi de xifrar la clau i lo de modular modular xD.
+		// lo de xifrar no se si realment serà necesari.
+	
+	
+	
+	
+	
+	
+}
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

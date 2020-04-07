@@ -1,0 +1,645 @@
+package MAIN;
+
+
+import java.util.Vector;
+
+
+  
+
+public class OrderedTree<Elem, Code extends Comparable<Code>> 
+{
+	int gtd=1000;
+	
+	private int n;					// numero d'elements... 
+	private NodeB<Elem,Code> raiz;	// referencia absoluta de l'arrel
+
+
+// funcion rotate --> 
+		// 1 RL
+		// 2 RR
+	  	// 3 LR
+		// 4 LL
+/*************************************************************************/	
+	// OPERACIONS CONSTRUCTOR
+	public OrderedTree ( int mida )
+	{
+		raiz = null;
+		n=0;
+	}
+		
+	public boolean removeElement(Code code)
+	{	
+		
+		
+		NodeB<Elem,Code> element = raiz, actual = raiz, aux, tempo = raiz;
+		int compare = 0;
+			
+// Search the element
+		
+		while (element != null)
+		{
+			compare = element.c.compareTo(code);
+			if(compare==0)// implica que son iguals aleshores...
+				{
+					System.out.println("Trobat!");
+					break;
+				}
+			else
+				if(compare < 0)	// implica que sigui mes petit
+					element = element.FDre;	
+				else
+					element = element.FEsq;
+				
+			if(element == null)
+				{
+					System.out.println("No Trobat!");	
+					return false;
+				}
+				
+				
+				
+		}
+		
+		
+		// suposant que hem trobat l'element a esborrar i estroba com a variable 
+		// element!
+	
+		
+			// ara només cal esborrarlo... analitzem primer el cas d'esborrat corresponent
+				int cas = 0;	// 0 fills
+				
+				if(element.FDre!= null && element.FEsq == null)
+					cas = 1;	// 1 fill
+				
+				if(element.FEsq!= null && element.FDre == null)
+					cas = 2;	// 1 fill
+				
+				if(element.FDre!= null && element.FEsq != null)
+					cas = 3;	// 2 fills
+		
+				System.out.println("Esborrat Tipus --> "+cas);
+			
+				
+				
+				
+			
+
+				// cases...
+					/*				
+					 * 	0 childrens	replace it with null			
+					 * 	1 children	replace it with the only child s'ha de saber si es fill esquerra o fill dret 
+					 * 	2 childrens replace it with right - most node in the left subtree 
+					 * 			
+					 * 				
+					 */
+				// case d = 1 	--> RL
+		 		// case d = 0   --> RR or RL // indiferent! 
+				// case d = -1  --> RR
+		
+		// how do we remove de element ???
+		
+// Procés d'esborrat
+				
+			//	if(element!=raiz)	// tractament d'esborrat l'arrel
+				
+				switch (cas)
+				{
+				case 0:	
+					
+					if(element.Pare != null)
+					{
+					actual = element.Pare;
+					
+					// cal indicar al pare que ha perdut un fill 
+					if (element.Pare.FDre == element)
+						element.Pare.FDre = null;
+					else 
+						element.Pare.FEsq = null;
+					// fill igual a null 
+						element = null;
+					}else
+						element = null;
+					
+					
+					break;
+				case 1: //if(element.FDre!= null && element.FEsq == null) ---- te fill dret
+					// cal indicar al pare que ha perdut un fill i fill igual anull
+					if (element.Pare != null)
+						   raiz=element.FDre;
+						else
+						{
+					
+					actual = element.Pare;
+						element.FDre.Pare = actual;
+							if(actual.FDre == element)
+								actual.FDre = element.FDre;
+							else
+								actual.FEsq = element.FDre;
+
+							
+						}
+						
+						element = null;
+					
+					break;
+				case 2: //if(element.FEsq!= null && element.FDre == null) ---- te fill esquerra
+					// cal indicar al pare que ha perdut un fill i fill igual anull
+					
+					if (element.Pare != null)
+						   raiz=element.FDre;
+						else
+						{
+						     	
+					actual = element.Pare;
+					element.FEsq.Pare = actual;
+						if(actual.FDre == element)
+							actual.FDre = element.FEsq;
+						else
+							actual.FEsq = element.FEsq;
+						}
+						
+						element = null;
+						
+					
+					break;
+				case 3: //if(element.FDre!= null && element.FEsq != null) ---- té 2 fills
+					// en aquest cas el minim fill dret es converteix en el padri del fill esquerra
+					
+					aux = element.FDre;	// buscar el now padrí
+					while (aux.FEsq!=null)
+						aux = aux.FEsq;
+					
+					actual = aux;	// es el padrí
+					tempo = aux.Pare;
+					
+					if(aux.Pare != element)		// si no soc el fill dret  de l'element
+						{
+							if (aux.FDre != null)       // i tinc fill dret
+								{
+									aux.Pare.FEsq = aux.FDre;
+										aux.FDre.Pare = aux.Pare;
+								}       
+							else
+								aux.Pare.FEsq = null;
+
+					         aux.FDre = element.FDre;
+					         element.FDre.Pare = aux;
+						}			
+				//--------------------------------------------------------	
+
+					aux.FEsq = element.FEsq;	// padri fill esquerra es element fill esquerra
+					element.FEsq.Pare = aux;   // element fill esquerra pare es padri fill esquerra pare
+	
+				//-----------------------------------------------------
+					if (element == raiz)
+					{
+					      aux.Pare = null;
+					      raiz = aux;
+					}
+					else
+					{
+					actual.Pare = element.Pare;	// actualitzar el pare de l'actual
+											if(element.Pare.FEsq == element )
+												element.Pare.FEsq = actual;
+											else 
+												element.Pare.FDre = actual;
+					}         					       
+				//-----------------------------------------------------
+					break;
+					
+					default:
+						System.out.println("CAS Errorni d'esborrat!");	
+						break;
+				}				
+			
+// Procés d'equilibri
+		
+				System.out.println("ARBRE ACTUAL: ");
+				setHigh(cas == 3 ? tempo : actual);
+				imprr();
+				System.out.println("FI ARBRE ACTUAL. \n");
+				
+				
+				
+				
+				// equilibrar l'arbre
+				
+				// EQUILIRATION !
+				System.out.println("START EQUILIBRATIION");
+			    equilibri(cas == 3 ? tempo : actual);	// es passa per parametre lo node més actual i actualitza el root
+				System.out.println("END EQUI\n");
+		return true;
+		
+		
+		
+	}
+		
+	public void addElement(Code code, Elem elem)
+	{	
+		NodeB<Elem,Code> element = new NodeB<Elem,Code>(code,elem,null,null,null);
+		
+		if(isEmpty())
+		{
+			raiz = element;
+			n++;
+		}
+		else
+ 		addElement(element, raiz);
+		
+		imprr();
+	}
+	
+	// retnorna raiz nova?
+	private NodeB<Elem,Code> addElement( NodeB<Elem,Code> element, NodeB<Elem,Code> temporal)
+	{	
+		
+		int compare;
+		NodeB<Elem,Code> node=temporal;		// per enfonzarse
+		String camino = "";
+		
+		while (node!=null)	// fins que s'hagi insertat
+		{
+			compare = element.c.compareTo(node.c);
+			
+				if(compare==0)// implica que son iguals aleshores...
+				{
+					System.out.println("Repetit!");
+					return raiz;
+				}else
+				if(compare > 0)	// implica que sigui mes petit
+					{
+					if(node.FDre == null)
+						{
+							node.FDre = element;
+							element.Pare = node;
+							gtd =3;
+							n++;
+							camino = camino+"R";
+							break;
+						}
+					else
+					{	
+						camino = camino+"R";
+						node = node.FDre;
+					}
+					}
+				else
+					{	
+					if(node.FEsq == null)
+						{
+							node.FEsq = element;
+							element.Pare = node;
+							gtd=1; 
+							n++;
+							camino = camino+"L";
+							break;
+						}	
+					else
+						{
+						camino = camino+"L";
+						node = node.FEsq;
+						}
+			}
+		}
+		// unavegada insertat el ultim node al seu lloc corresponent 
+		int distancia = camino.length();
+		System.out.println("\nCamí seguit: --> "+camino+" <--\nDistancia: "+distancia);
+	
+		
+		
+		System.out.println("ARBRE ACTUAL: ");
+		imprr();
+		System.out.println("FI ARBRE ACTUAL. \n");
+		
+		
+		
+		setHigh(element);
+		
+		
+		
+		
+		
+		// equilibrar l'arbre
+		
+		// EQUILIRATION !
+		System.out.println("START EQUILIBRATIION");
+	    raiz = equilibri(element);	// es passa per parametre lo node més actual i actualitza el root
+		System.out.println("END EQUI\n");
+		return null;	
+	}
+	
+	public void setHigh(NodeB<Elem,Code> node)
+	{
+		while(node!=null)
+		{
+			node.h = getMax(node.FDre == null ? -1 : node.FDre.h , node.FEsq == null ? -1 : node.FEsq.h)+1;	// retorna el maxim entre dos fills 
+			node = node.Pare;
+		}
+		
+	}
+	
+	private NodeB<Elem,Code> equilibri(NodeB<Elem,Code> element)	// element es la posicio actual
+	{
+		 
+		 
+		int b = 0;			// balança de node actual
+		 
+		
+		
+	// aranquem desde la ultima posicio
+		
+			while (element!=null)	// fins que s'hagi insertat
+				{
+				
+				System.out.println("Ele: "+element.c);
+				
+				
+				
+				
+				
+				// mirar la balança de l'element
+				b = getBalanceFactor(element);
+				System.out.println("\tBalance: "+b);
+				if(b==2||b==-2)
+				{
+					 
+					// cal realitzar una rotacio
+					if(b==2)
+					{// serà RR  o  RL
+						if((element.FDre.FDre!= null)
+							&& (getBalanceFactor(element.FDre) == 1))
+							b = 2;
+						else
+							b = 1;
+					}else	// serà LL  o  LR 
+						if((element.FEsq.FEsq!= null)
+								&& (getBalanceFactor(element.FEsq) != 1))
+							b = 4;
+						else
+							b = 3;
+					
+					element = Rotate(element, b);
+					
+					
+				
+					setHigh(element);
+				}
+				
+
+				
+				// actualitza l'alçada del node actual
+				if(element.FDre != null && element.FEsq != null)
+						System.out.println("\tAltura: "+element.h+" "+element.c);
+				
+				
+				if(element.Pare==null)
+				return element;
+				element = element.Pare;
+
+				
+				
+				}
+				return element;
+	}
+	
+	public int getTreeDepth()
+	{
+		return raiz.h;
+	}
+	
+/*************************************************************************/	
+	// OPERACIONS CONSULTORES
+	
+	public Elem getElement(Code codi)
+	{
+		NodeB<Elem,Code> node = raiz;
+		
+		while (node!=null)
+		{
+			if (codi.compareTo(node.c)>0)
+				node=node.FDre;
+			else if (codi.compareTo(node.c)<0)
+				node=node.FEsq;
+			else
+				return node.e;
+		}
+		
+		System.out.println("no Trobat");
+		return null;
+	}
+		
+	public Vector<Elem> getElements()
+	{	
+		 
+		Vector<Elem> llista = new Vector<Elem>(n);
+        return getElements(raiz, llista);
+	
+	}
+	
+	private Vector<Elem> getElements(NodeB<Elem,Code> node, Vector<Elem> llista)
+	{
+		if(node!=null)
+			{
+			getElements (node.FDre, llista );
+			llista.addElement(node.e);
+			getElements (node.FEsq, llista );
+			}
+		return llista;
+	}
+	
+	public Vector<Elem> getElementsBetween(Code ini, Code fi)
+	{
+
+		Vector<Elem> llista = new Vector<Elem>(n);
+        return getElements(raiz, llista, ini, fi);
+	}
+	
+	private Vector<Elem> getElements(NodeB<Elem,Code> nodes, Vector<Elem> llista, Code ini, Code fi)
+	{
+		
+		if(nodes!=null)
+			{
+			System.out.println(" --> "+nodes.c.compareTo(ini));
+				getElements(nodes.FDre, llista, ini, fi );
+				if((nodes.c.compareTo(ini)>=0)&&(nodes.c.compareTo(fi)<=0))
+						llista.addElement(nodes.e);
+				//else
+					//return llista;
+				getElements (nodes.FEsq, llista, ini, fi );
+			}
+		return llista;
+	}
+	
+
+	
+	
+	
+	
+	
+	public int getBalanceFactor (NodeB<Elem,Code> index)		// retorna la balança del node
+	{
+		
+		if(index.FDre == null && index.FEsq == null)	// no te fill s pertan h = 0
+			return 0;
+		
+		NodeB<Elem,Code> fillEsquerra = index.FEsq;
+		NodeB<Elem,Code> fillDret = index.FDre;
+		int  l = 0, r = 0;
+		
+		if(index.FDre != null)	// agafar h fill esquerra
+			r = fillDret.h+1;
+		if(index.FEsq != null)	// agafar h fill dret
+			l = fillEsquerra.h+1;
+		return r-l;	// agafar el més gran + 1 i serà la meva alçada
+		
+		
+	}
+ 
+	// retorna el maxim entre dos valors
+	private int getMax(int a, int b)		// set max factor tree depth
+	{
+		return (a > b ? a : b);
+	}
+	
+	public void imprr(){
+        imprimir(raiz);
+    }
+
+    private void imprimir(NodeB<Elem,Code> node){
+        if ( node != null )
+        {
+        	imprimir(node.FDre);
+            System.out.println("\t"+node.c+" e-h "+node.h);
+            imprimir(node.FEsq);
+        }
+    }
+	
+	
+    public boolean isEmpty()
+    {
+    	return n==0;
+    }
+	
+
+/*************************************************************************/	
+	// OPERACIONS AUXILIARS  
+	
+	private NodeB<Elem,Code> Rotate(NodeB<Elem,Code> mig, int tipus )
+	{
+		NodeB<Elem,Code> aux = null;
+// sentit ens indica si es esquerra o dreta el pare
+	switch (tipus)
+	{
+	case 1:	
+		System.out.println("-------------------------->>>>RL");
+			aux = rotarRL(mig);
+			
+		break;
+	case 2:
+		System.out.println("-------------------------->>>>RR");
+			aux = rotarRR(mig);
+			
+		break;
+	case 3:
+		System.out.println("-------------------------->>>>LR");
+			aux = rotarLR(mig);
+			
+		break;
+	case 4:
+		System.out.println("-------------------------->>>>LL");	
+			aux = rotarLL(mig);
+			
+		break;
+	default:
+		System.out.println("CAS ROTACIÓ ERRONI!");
+		
+	}
+ 
+	return aux;	// root del subarbre?
+
+	}
+		
+	public NodeB<Elem,Code> rotarLL(NodeB<Elem,Code> h2)
+	{
+		NodeB<Elem,Code> a,b;
+			
+		a = h2;				// x
+		b = h2.FEsq;		// shaco			
+
+		b.Pare = a.Pare;
+		
+		a.FEsq = b.FDre;
+		if(a.FEsq!=null)
+			a.FEsq.Pare = a; 
+		
+		b.FDre = a;
+		a.Pare = b;
+		
+		if(b.Pare!=null)
+				if (b.Pare.FDre == a)	// si avans era pare de a ara sera el meu pare
+					b.Pare.FDre = b;
+				else
+					b.Pare.FEsq = b;
+		 
+		setHigh(b.FDre);
+
+		return b;
+		
+	}
+
+	public NodeB<Elem,Code> rotarLR(NodeB<Elem,Code> h2){		// OK
+ 
+		rotarRR(h2.FEsq);
+		return rotarLL(h2);
+		
+ 
+	}
+
+public NodeB<Elem,Code> rotarRR(NodeB<Elem,Code> h2){
+		
+ 
+		NodeB<Elem,Code> a,b;
+		
+		a = h2;				// a
+		b = h2.FDre;		// shaco			
+
+		b.Pare = a.Pare;
+		
+		a.FDre = b.FEsq;
+		if(a.FDre!=null)
+			a.FDre.Pare = a; 
+		
+		b.FEsq = a;
+		a.Pare = b;
+		
+		if(b.Pare!=null)
+				if (b.Pare.FDre == a)	// si avans era pare de a ara sera el meu pare
+					b.Pare.FDre = b;
+				else
+					b.Pare.FEsq = b;
+		
+		
+		setHigh(b.FEsq);
+		
+		
+		return b;
+		
+	}
+
+public NodeB<Elem,Code> rotarRL(NodeB<Elem,Code> h2){
+ 
+	rotarLL(h2.FDre);
+	return rotarRR(h2);
+	
+}
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

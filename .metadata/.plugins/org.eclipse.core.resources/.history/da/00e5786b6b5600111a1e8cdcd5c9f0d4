@@ -1,0 +1,31 @@
+
+public class Show {
+
+	private String title;
+	private Episode epi[];
+	private int numActual = 0;
+	private int numMax;
+		// BUILDER
+		
+		// create a new show // (-titol-,-max_epi-)
+		public Show (String name, int numepi)
+		{
+			numMax = numepi;
+			title = name;
+			epi = new Episode [numepi]; 
+			
+		}
+	
+		
+		
+		// SETTER
+		
+		public void addEpisode(Show tite, Episode epi){
+			
+
+		}
+		
+		public String getTitle(){
+			return(this.Title);
+		}
+}

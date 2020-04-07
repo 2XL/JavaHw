@@ -1,0 +1,311 @@
+package TADsHash;
+
+//import java.util.Vector;
+
+import java.util.Vector;
+
+import TADsGeneric.*;
+
+public class HashTable< Elem, Code>{	// taula de hashing genèric
+//						hash code - user - Linkedlist dinamic
+
+	// ATRIBUTS
+	
+	int dimT;	// mida maxima del taulell es a dir la taula de hashing
+	int numU;	// numero de usuaris que hiha
+	
+	Vector<LinkedListD<Elem, Code>> T;
+	
+	// matriu linkedlist dinamic
+
+	
+	
+	
+	// CONSTRUCTOR
+	public HashTable (int mida)
+	{
+		
+			
+		// crea una estructura de hash table, sense cap element
+		 T = new Vector<LinkedListD<Elem, Code>>(mida);	// vector amb mida!
+		// inicialitzar T com a vector de vectors
+		
+		
+		for(int i=0;i<mida;i++)
+			{
+			//T.elementAt(i) = new LinkedListD<Elem, Code>(mida);
+			
+			T.insertElementAt(new LinkedListD<Elem, Code>(mida), i);
+			System.out.println("Elements "+i);
+			}
+				// amb la mida d'elements que li passem per parametre
+		dimT = mida;
+		numU = 0;	// num usuari
+
+
+		
+
+		
+	}
+	
+	public boolean addElement( Code clau, Elem ele)// afegir usuari amb el codi 
+	{					// String	/	user
+		
+		int c;
+									// cridar la funcio de hash
+		c = HashFuntion(clau, dimT);	// tenir la clau
+		
+		 // aqui caldria comprovar el factor de carrega i mirar si cal actualizarlo!
+		if(T.elementAt(c).getElement(clau)==null)
+		{
+			
+			// REDIMENSIONAMENT! QUAN ES DETECTA QUE FACTOR DE CARREGA > 75
+			
+			T.elementAt(c).addElement(clau, ele);
+			numU++;
+			System.out.println("S'ha afegit l'usuari amb éxit!");
+			return true;
+		}else
+			System.out.println("L'usuari ja existeix!");
+			return false;
+		 
+		 
+		// haig de introduir un user en la columna c i user es un node de vector
+			// carregar ... i insertar
+		
+		
+		// afegeix un nou element a la taula en el lloc que li pertoca segons la funcio de hash
+		// cal comprovar si l'element existia
+	
+		
+	}
+	
+	public boolean removeElement(Code clau)
+	{
+		int c;
+		// cridar la funcio de hash
+		c = HashFuntion(clau, dimT);	// tenir la clau
+		
+		// es buida o ocupada?
+		
+		if(T.elementAt(c).getElement(clau)!=null)
+		{
+		T.elementAt(c).removeElement(clau);// obtenim el node de la taula
+		numU--;
+			System.out.println("S'ha esborrat l'usuari amb éxit!");
+			return true;
+		}else
+			System.out.println("L'usuari no existeix!");
+			return false;
+		// aquesta operacio elimina de la taula l'element identificat per la clau que passem per parametre.
+		// dona error si l'element que esborrem no es troba a la llista
+	}
+	
+	
+	// CONSULTORES
+	public boolean isEmpty()
+	{
+		// retorna false si hiha algun element a la taula 
+		return numU==0;
+	}
+	
+	public Elem getElement(Code clau)
+	{
+		int c;
+		c = HashFuntion(clau,dimT);
+		// aquesta, retorna l'element corresponent a la clau que passem com a parametre.
+		// dona error, si no hi ha cap element identificadt per la clau.
+		
+		if(T.elementAt(c).getElement(clau)==null)
+	System.out.println("Error de Cerca no hiha Element amb aquest Clau!");
+		
+		
+		
+		
+		
+		return T.elementAt(c).getElement(clau);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	// tots els nodes de usuaris amb els correus
+	public Vector<Node<Elem, Code>> getElementss()	// retorna tots USERS(Usuari)
+	{
+		Vector<Node<Elem, Code>> aux = new Vector<Node<Elem, Code>>(numU);
+		// retorna tots els elements de la taula de hash
+		for(int i=0; i<dimT;i++)
+		{
+			if(!T.elementAt(i).isEmpty())
+			{// si no esta vuit recercar usuaris
+				aux.addAll(T.elementAt(i).getElements());
+			}
+		}
+		return aux;
+	}
+	
+	
+	public Vector<Elem> getElements()				// retorna tots USERS(Usuari)
+	{
+		
+		// retorna una llista amb totes usuaris que hi ha a la taula.
+		// dona error si no hiha cap usuari.
+		Vector<Node<Elem, Code>> aux = new Vector<Node<Elem, Code>>(numU);
+		
+		aux = getElementss();
+		
+		Vector<Elem> aux2 = new Vector<Elem>(numU);
+		for(int i=0;i<numU;i++)
+		aux2.insertElementAt(aux.elementAt(i).e, i);
+		
+		if(numU==0){
+			System.out.println("no hiha cap usuari al sistema!");
+		}
+		
+		return aux2;
+	}
+	
+	public Vector<Code> getClaus()				// retorna tots CODE(correu)
+	{
+		
+		// retorna una llista amb totes les claus que hi ha a la taula.
+		// dona error si no hih a cap clau.
+		Vector<Node<Elem, Code>> aux = new Vector<Node<Elem, Code>>(numU);
+		
+		aux = getElementss();
+		
+		Vector<Code> aux2 = new Vector<Code>(numU);
+		for(int i=0;i<numU;i++)
+		aux2.insertElementAt(aux.elementAt(i).c, i);
+		
+		if(numU==0){
+			System.out.println("no hiha cap usuari al sistema!");
+		}
+		
+		
+		return aux2;
+	}
+	
+	
+	
+	
+	
+	
+	public float getLoadFactor()
+	{
+		// retorna el factor de carrega =
+		// numero d'elements/ capacitat del sistema.
+		return (numU*100)/dimT;
+	}
+	
+	public int HashFuntion(Code correo, int midamax)
+	{
+		int c;
+		c = correo.hashCode()%midamax;
+		/*
+			int clau=(correo.length() * (int)correo.charAt(0)); 
+			int mida;
+			mida = correo.length();
+			for (int i=0; i<mida; i++)
+			{		clau = clau % midamax;
+					clau = (i^3) + (clau*correo.charAt(i)) ;
+			}
+			
+		*/
+		
+		
+		System.out.println("HASH CODE ->"+c);
+		if(c<0)
+			c= midamax+c;
+		System.out.println("Code   " +c);
+		
+		
+			return c;
+	}
+	
+	
+	public void reDimention(int factor)	// factor = quantes vegades mes gran!
+	{
+				
+		Vector<LinkedListD<Elem, Code>> nT;
+		int ndimT=dimT*factor;	// mida maxima del taulell es a dir la taula de hashing
+		
+		
+	
+		
+		// T (del sistema) - nT (redimensianat)
+		// inicialitzar vecor nou 
+		 nT = new Vector<LinkedListD<Elem, Code>>(ndimT);	// vector amb mida!
+		// inicialitzar T com a vector de vectors
+		
+		 // vector amb tots els nodes (correu , Usuari)
+		 Vector<Node<Elem, Code>> aux =  this.getElementss();	// carregar tots els elements que hihavia en la taula anterior
+		 int cont=0;
+		 
+	do {
+		 int c;
+			// cridar la funcio de hash
+		 	c = HashFuntion(aux.elementAt(cont).c, ndimT);	// tenir la clau
+
+		 // aqui caldria comprovar el factor de carrega i mirar si cal actualizarlo!
+	
+		 	System.out.println(c);
+		 	nT.elementAt(c).addElement(aux.elementAt(cont).c, aux.elementAt(cont).e);
+			 cont++;
+		 
+		}while(cont!=numU); 
+		 
+		 
+		this.T = nT;
+		this.dimT = ndimT; 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		/*
+		for(int i=0;i<mida;i++)
+			{
+			//T.elementAt(i) = new LinkedListD<Elem, Code>(mida);
+			
+			T.insertElementAt(new LinkedListD<Elem, Code>(mida), i);
+			System.out.println("Elements "+i);
+			}
+				// amb la mida d'elements que li passem per parametre
+		dimT = mida;
+		numU = 0;	// num usuari
+
+	*/
+		// h seria la taula antiga
+			// selecionar tots els usuaris que hiha
+		
+		
+		// inicialitzar una taula nova amb la midanova substitueix el actual T
+		
+		// en un bucle for ... anar addUsers i jasta.
+			
+	
+	
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

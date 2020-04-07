@@ -1,0 +1,27 @@
+package TADs;
+
+
+public class LinkedListD<Elem, Code> extends LinkedList<Elem, Code> {
+
+	
+	private NodeD<Elem,Code> seg;
+			
+
+	public boolean addElement(Code code, Elem nou) {
+		
+		
+		
+		
+		
+		return false;
+	}
+
+	
+	public boolean removeElement(Code code) {
+	
+		return false;
+	}
+
+		
+
+}

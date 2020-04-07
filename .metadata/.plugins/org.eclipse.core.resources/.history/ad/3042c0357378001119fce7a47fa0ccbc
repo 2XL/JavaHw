@@ -1,0 +1,64 @@
+package TADs;
+
+
+public class LinkedListD<Elem, Code> extends LinkedList<Elem, Code> {
+
+	
+	
+	private NodeD<Elem,Code> midaMax;
+	private NodeD<Elem,Code> seg;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public LinkedListD(int midaM){		// estatica amb mida maxima... inicialitzar els variables
+		NodeS<Elem,Code> midaMax;
+		numElems=0;
+		
+		info = new Vector<NodeS<Elem, Code>>(midaMax);	
+		
+		
+		for (int i=0; i<midaMax;i++)		// 
+		{
+			
+		   info.insertElementAt(new NodeS<Elem, Code>(), i);		// inicialitzar les instancies de nodes
+		 
+		   // fer que els punters apuntin inicialment al seguent index del vector
+		
+			// inicialitzar un linkers de seguents lliures
+		   info.elementAt(i).s=i+1;							// inicialitzar els anteriors
+		   info.elementAt(i).a=i-1;
+		   
+		}
+		
+		info.elementAt(0).a=midaMax-1;
+		info.elementAt(midaMax-1).s=0;		// llista doblement enllaçada circular...
+		
+		
+	}
+	// tots son del tipus node
+		
+
+	public boolean addElement(Code code, Elem nou) {
+		
+		
+		
+		
+		
+		return false;
+	}
+
+	
+	public boolean removeElement(Code code) {
+	
+		return false;
+	}
+
+		
+
+}

@@ -1,0 +1,54 @@
+package TADs;
+
+
+
+public class LinkedListD<Elem> extends LinkedList<Elem> {
+
+	@Override
+	public boolean addElement(int code, Object nou) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeElement(int code) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Elem getLast() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Elem getElement(int code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Elem[] getElements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getNumElements() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+		
+		
+		
+		
+
+}

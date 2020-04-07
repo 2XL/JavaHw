@@ -1,0 +1,129 @@
+package TADs;
+
+import java.util.Vector;
+
+
+public class LinkedListD<Elem, Code> extends LinkedList<Elem, Code> {
+
+	
+	private NodeD<Elem,Code> Raiz;
+			
+	public LinkedListD(int midaM)
+	{
+		Raiz = null;
+	}
+////////////////////////////////////////////////////////////////////////
+	public boolean addElement(Code code, Elem nou) {
+		
+	
+		if(getElement(code)!=null)		// repetido
+					return false;
+				
+	/////////////////////////////////////////			
+			
+		NodeD< Elem,Code> n = new NodeD< Elem,Code>();
+		
+		n.c =code;
+		n.e = nou;
+		
+		if(Raiz == null)	// llista buida
+		{
+			n.s = n;
+			n.a = n;
+			Raiz = n;
+		}
+		else
+		{
+			NodeD<Elem,Code> l = Raiz.a;		// ultimo introducido
+			n.s = Raiz;	// siguiente de n = raiz
+			n.a = Raiz.a;	// anteior de n = ultimo
+			Raiz.a = n;
+			l.s = n;
+		}
+		numElems++;
+		return false;
+	}
+////////////////////////////////////////////////////////////////////////	
+	public boolean removeElement(Code code) 
+	{
+	
+	// quan elimino l'element el trec d'entre dos i l'inseto entre l'ultim i el primer
+		
+		if(numElems==0){ System.out.println("no hi ha elements al sistema"); return false;}	// comprovar si esta buid el sistema
+		NodeD<Elem,Code> Aux = Raiz;
+		
+		if(!Raiz.equals(null))	// tetectar si esta buida
+		do		// determinar si estroba en la posicio 
+		{
+			if(Aux.c.equals(code))
+			{
+				// actualizar los punteros
+				(Aux.a).s=Aux.s;
+				(Aux.s).a=Aux.a;
+				Aux =null;
+				numElems--;
+				// borrar elemento
+				return true;
+			}	
+			Aux=Aux.s;
+		}while(Aux!=Raiz);
+	
+		
+		numElems--;
+		return false;
+	}
+////////////////////////////////////////////////////////////////////////
+	public Elem getLast(){
+		return (Raiz.a).e;
+	}
+////////////////////////////////////////////////////////////////////////
+	public Elem getElement(Code code){
+
+		
+		if(Raiz!= null)
+		{	// tetectar si esta buida
+			
+			NodeD<Elem,Code> Aux = Raiz;
+		do		// determinar si estroba en la posicio 
+		{
+			if(Aux.c.equals(code))
+				return Aux.e;
+				
+			Aux=Aux.s;
+		}while(Aux!=Raiz);
+		}
+		return null;
+	}
+////////////////////////////////////////////////////////////////////////
+	public Vector<Node<Elem, Code>> getElements() {
+		if(Raiz.equals(null))
+			return null;
+		Vector<Node<Elem, Code>> llista = new Vector<Node<Elem,Code>>();
+
+		NodeD<Elem,Code> Aux = Raiz;
+		do
+		{
+			llista.addElement(Aux);
+			Aux = Aux.s;	
+		}while(Aux!=Raiz);
+		
+		
+		return llista;
+	}
+////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

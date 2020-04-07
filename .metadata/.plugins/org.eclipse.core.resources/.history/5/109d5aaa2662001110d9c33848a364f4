@@ -1,0 +1,32 @@
+
+public class ShowNO extends AbsShow {
+
+	// crear una serie no ordenada
+	public ShowNO (String name, int numepi)	// titol de la serie i el num maxim d'episodis
+	{	
+		title = name;
+		epi = new Episode [numepi]; 
+		numActual = 0;
+		numMax = numepi;
+		ple = false;
+		System.out.println("Serie Creat: ¡"+title+"?");
+	}
+	
+	public boolean addEpisode(Episode epis){
+		boolean existeix = this.EpiTrobat(epis);
+		// cal comprovar si existia previament
+		if((!ple)&&(!existeix)) // no ple i no existeix
+		{
+			//afegir episodi
+			
+			epi[numActual]=epis;
+			numActual++;
+			if (numActual == numMax)
+			ple = true;
+			return(true);		// insertat
+		}	
+		return(false);			// no insertat
+	}
+	
+	// fer que sigui no ordenada... no fer res xD
+}

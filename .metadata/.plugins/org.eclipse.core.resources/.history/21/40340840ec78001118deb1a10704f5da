@@ -1,0 +1,9 @@
+package TADs;
+
+
+	public abstract class Node<Elem, Code>{
+		
+		
+		
+		
+}

@@ -1,0 +1,38 @@
+
+	package TADs;
+
+	public class NodeD<Code, Elem> {
+		
+		private Code codigo;
+		private Elem elemento;
+		private int sig;
+		private int ant;
+		
+		public NodeD(Code cod, Elem ele)
+		{
+			codigo=cod;
+			elemento=ele;
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		//Node<Code, Element>
+		
+		// implementacio estatica o dinamica
+		// estatica ==  seran dos enters
+		// dinamica ==  dos punters
+		
+	// 
+		
+		
+		
+		
+		
+	}
+
+

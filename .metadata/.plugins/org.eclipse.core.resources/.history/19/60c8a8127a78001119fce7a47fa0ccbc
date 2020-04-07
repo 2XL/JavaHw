@@ -1,0 +1,108 @@
+package TADs;
+
+
+public class LinkedListD<Elem, Code> extends LinkedList<Elem, Code> {
+
+	
+	private NodeD<Elem,Code> Raiz;
+			
+	public LinkedListD(int midaM)
+	{
+		Raiz = null;
+	}
+	
+
+	public boolean addElement(Code code, Elem nou) {
+		
+	
+		if(getElement(code)!=null)		// repetido
+					return false;
+				
+	/////////////////////////////////////////			
+			
+		NodeD< Elem,Code> n = new NodeD< Elem,Code>();
+		
+		n.c =code;
+		n.e = nou;
+		
+		if(Raiz == null)	// llista buida
+		{
+			n.s = n;
+			n.a = n;
+			Raiz = n;
+		}
+		else
+		{
+			NodeD<Elem,Code> l = Raiz.a;		// ultimo introducido
+			n.s = Raiz;	// siguiente de n = raiz
+			n.a = Raiz.a;	// anteior de n = ultimo
+			Raiz.a = n;
+			l.s = n;
+		}
+		
+		return false;
+	}
+
+	
+	
+	
+	public boolean removeElement(Code code) 
+	{
+	
+	// quan elimino l'element el trec d'entre dos i l'inseto entre l'ultim i el primer
+		NodeD<Elem,Code> Aux = Raiz;
+		
+		
+		while(Aux.s!=Raiz)		// determinar si estroba en la posicio 
+		{
+			if(Aux.c == code)
+			{
+				
+				// actualizar los punteros
+				
+				
+				// borrar elemento
+				return true;
+			}	
+			Aux=Aux.s;
+		}
+	
+		
+		
+		/*
+		int i, j=P;
+		for (i=0; i<numElems;i++)			// j es la posicio actual
+			{	// determinar si l'element ja existia
+					// se actualitza seguent casella
+				if(info.elementAt(j).c.equals(code))	// si existeix caldra borrar-lo
+				{
+					int seg, ant;
+					seg = info.elementAt(j).s;
+					ant = info.elementAt(j).a;
+					
+					info.elementAt(ant).s =seg;
+					info.elementAt(seg).a =ant;
+					
+					info.elementAt(j).s=P;
+					info.elementAt(j).a=U;
+					
+					info.elementAt(U).s=j;
+					info.elementAt(P).a=j;
+					//trobat
+					
+					U = j;	// el ultim paso a ser jo
+					numElems--;	// actualitzar el nombre d'elements que hiha
+					return true;
+				}
+				j=info.elementAt(j).s;		// comprovar el seguent
+			}	
+			*/
+		
+		
+		
+		return false;
+	}
+
+		
+
+}

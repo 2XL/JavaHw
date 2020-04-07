@@ -1,0 +1,115 @@
+package MAIN;
+
+
+
+import java.util.Vector;
+import EXCEPTION.FullShow;
+import TADsSerie.*;
+
+public class Show extends AbsShow {
+
+	public OrderedTree<Episode, String> epi;
+	// public OrderedTree<String, LinkedListD<String, Episode>> epi[];
+	
+	// CONSTRUCTOR
+	
+	public Show (String nom, int numEpi)
+	{
+		title =nom;
+		numMax = numEpi;
+		numActual = 0;
+		epi = new OrderedTree<Episode, String>(numEpi);
+		ple = numEpi == 0 ? true : false;
+	}
+
+	
+	public boolean addEpisode(Episode epis) throws FullShow 
+	{
+		// cal comprovar si ja existia o si el sistema esta plé 
+		epi.addElement(epis.getTitle(), epis);
+		
+		numActual++;
+		if(numActual == numMax)
+			ple = true;
+		return false;
+	}
+	
+	public boolean getIsEmpty()
+	{
+		return epi.isEmpty();
+	}
+	
+	public void removeEpisode (String id)
+	{
+		
+		
+		if(epi.removeElement(id))
+		numActual--;
+		
+		
+	}
+
+	
+	// OPERACIONS CONSULTORES
+	
+	public String[] getEpisodeCodes(int tipus)
+	{
+		// tipus (1) = float 
+		// tipus (0) = string
+		String[] claus = new String[numActual]; 
+		
+		
+		
+		if(tipus == 0) // retorna nom
+			claus = null;
+		else			// retorna rating
+			claus = null;
+		
+		
+	
+		return claus;
+	}
+	
+	public Episode getEpisode (String clau, int tipus)
+	{	// si tipus = 1 rating
+		// si tipus = 0 string
+		return null;
+	}
+
+	
+	public int[] EpisodeCodesSeason ( int temporada )
+	{
+		return null;
+	}
+	
+	
+	public Vector<Episode> getEpisodesBetween (String a, String b)
+	{
+		return null;
+	}
+	
+	
+	public void getAllEpisodes()
+	{
+		// retorna tos els episodis de la serie
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

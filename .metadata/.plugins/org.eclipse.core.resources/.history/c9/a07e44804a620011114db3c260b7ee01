@@ -1,0 +1,42 @@
+import Exceptions.*;
+import java.util.*;
+
+public class ShowL extends AbsShow {
+	
+	private List epi;
+	
+	
+	public ShowL (String name, int numepi) //
+	{
+		title = name;
+		epi = new ArrayList(); 
+		numActual = 0;
+		numMax = numepi;
+		ple = false;
+		System.out.println("Serie Creat: ¡"+title+"?");
+	}
+	
+	
+	public boolean addEpisode(Episode epis) {
+		
+		boolean existeix = this.EpiTrobat(epis);
+		// cal comprovar si existia previament
+		if((!ple)&&(!existeix)) // no ple i no existeix
+		{
+			//afegir episodi
+			
+			epi.add(epis);
+			numActual++;
+			if (numActual == numMax)
+			ple = true;
+			return(true);		// insertat
+		}	
+		try{
+			throw new FullShow();
+		}catch(FullShow e){e.getMessage();}
+		
+		
+		return false; 	// no insertat
+	}
+
+}

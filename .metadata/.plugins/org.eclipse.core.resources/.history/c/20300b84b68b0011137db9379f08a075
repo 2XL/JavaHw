@@ -1,0 +1,57 @@
+package TADsHash;
+
+public class User 
+{
+	static final int MAX_KEYS = 100;
+	String name;	// nom de l'usuari
+	String mail;	// email de l'usuari
+	int[] keys;		// taula de keys de series favorites
+	
+	int nShow=0;	// contador de numero de series
+	
+	
+	
+	
+	// CONSTRUCTOR
+	public User(String nom , String mail, int[] keylist)
+	{
+		name = nom;
+		this.mail = mail;
+		nShow= keylist.length;
+		System.out.println(nom+" te ->"+nShow+" favorits");
+		keys = new int[nShow];
+		keys = keylist;
+		
+	// crea a la taula de hash una entrada nova
+	
+	}
+	// CONSULTORES
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getEmail()
+	{
+		return mail;
+	}
+	
+	public String[] getFavorites(String name)
+	{
+		String[] xows=null;
+		// retorna una llista de noms de series de l'usuari especificat
+		return xows;
+	}
+	
+}
+// cal fer servir les implementacions dels tad's generics fetes a la practica 2'
+// fer linkedlists de user?
+
+// - programa principal que permeti fer les proves pertinents:
+	//- s'ha de poder preguntar al principi la mida maxima del servidor'
+	//- carregar les dades contingudes al fitxer:
+			//- serie_p2.xml
+			//- usuaris_p3.xml 
+			//- crear els objectes necesaris...
+	// mitjançant un menú ha de permetre realitzar la creacio i consulta de les dades de les series
+	// i dels episodis, afegir, esborrar i consultar usuaris i les seves series favorites;

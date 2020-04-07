@@ -1,0 +1,23 @@
+package TADs;
+
+public interface EspecLinkedList<Elem> {
+	// operacions constructores
+	
+	boolean addElement(int code, Object nou);	// afegir un element a la llista
+	boolean removeElement(int code);			// esborrar un element concret de la llista
+	
+	// operacions consultores
+
+	LinkedList getLast();			// determina el ultim afegit
+	boolean isEmpty();				// determina si la llista es buida
+	Object getElement(int code);	// retorna un element concret
+	Object[] getElements();			// retorna tots els elements de la llista
+	int getNumElements(); 			// retorna el nombre d'elements que hiha a la llista
+
+	// operacions auxiliars
+	
+	
+	
+	
+
+}

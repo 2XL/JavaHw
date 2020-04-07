@@ -1,0 +1,15 @@
+package TADs;
+
+import java.util.Vector;
+
+public class LinkedListD<Elem> extends LinkedList<Elem> {
+
+	public LinkedListD(){
+		numElems=0;
+	}
+		
+		
+		
+		
+
+}

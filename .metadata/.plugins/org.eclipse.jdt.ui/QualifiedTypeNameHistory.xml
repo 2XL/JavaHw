@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
+<fullyQualifiedTypeName name="javax.swing.text.Document"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilder"/>
+<fullyQualifiedTypeName name="TADsHash.User"/>
+<fullyQualifiedTypeName name="TADsSerie.ShowNO"/>
+<fullyQualifiedTypeName name="TADsGeneric.Node"/>
+<fullyQualifiedTypeName name="TADsGeneric.ShowManager"/>
+<fullyQualifiedTypeName name="java.util.Vector"/>
+<fullyQualifiedTypeName name="TADsGeneric.LinkedListD"/>
+<fullyQualifiedTypeName name="TADsSerie.AbsShow"/>
+<fullyQualifiedTypeName name="sun.org.mozilla.javascript.internal.Node"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+</qualifiedTypeNameHistroy>

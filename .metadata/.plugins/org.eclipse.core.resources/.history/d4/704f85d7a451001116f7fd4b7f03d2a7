@@ -1,0 +1,58 @@
+
+public class Episode {
+
+	private int Code;
+	private String Title;
+	private int Season;
+	private int Episode;
+	private String Date;
+	private float Rating;
+	private String URL; 
+	
+	public Episode(){
+		
+		
+		
+	}
+	
+	
+	
+	public int getCode(){
+		return(this.Code);
+	}
+	
+	public String getTitle(){
+		return(this.Title);
+	}
+	
+	public int getSeason(){
+		return(this.Season);
+	}
+	
+	public int getEpisode(){
+		return(this.Episode);
+	}
+	
+	public String getDate(){
+		return(this.Date);
+	}
+	
+	public float getRating(){
+		return(this.Rating);
+	}
+	
+	public String getURL(){
+		return(this.URL);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

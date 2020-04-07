@@ -1,0 +1,11 @@
+package Exceptions;
+
+public class VoidSearch  extends Exception{
+	private static final long serialVersionUID = 1L;
+public VoidSearch(String msg){
+	super(msg);
+	}
+}
+
+
+

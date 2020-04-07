@@ -1,0 +1,34 @@
+package TADs;
+
+public class NodeLinker<Elem> {
+
+	private Elem elemento;
+	private int sig;
+	private int ant;
+	
+	public NodeLinker(Elem ele, int next, int last){
+		elemento=ele;
+		sig=next;
+		ant=last;	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//Node<Code, Element>
+	
+	// implementacio estatica o dinamica
+	// estatica ==  seran dos enters
+	// dinamica ==  dos punters
+	
+// 
+	
+	
+	
+	
+	
+}

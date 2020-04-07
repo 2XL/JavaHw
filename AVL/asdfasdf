@@ -1,0 +1,399 @@
+package MAIN;
+
+
+import java.util.Vector;
+
+// import arbolAVL.AVLNode;
+public class OrderedTree<Elem, Code extends Comparable<Code>> {
+	int gtd=1000;
+	private int n;					// numero d'elements... 
+	private NodeB<Elem,Code> raiz;	// referencia absoluta de l'arrel
+	private NodeB<Elem,Code> ref;
+	//private int i=0;
+	private int imprimir = 0;
+/*************************************************************************/	
+	// OPERACIONS CONSTRUCTOR
+	public OrderedTree ( int mida )
+	{
+		raiz = null;
+		n=0;
+	}
+	
+	
+	public void removeElement(Code code)
+	{
+		
+		
+		
+		
+	}
+	
+	
+	public boolean addElement(Code code, Elem elem)
+	{	NodeB<Elem,Code> node;
+		NodeB<Elem,Code> node_nou = new NodeB<Elem,Code>(code, elem, null, null, null);
+		System.out.println("\n\n"+n+"\tCREAT */*-*/+?¿Ç*?Ç->"+code);
+		if(isEmpty())
+		{
+			raiz = node_nou;
+			n++;
+			System.out.println(n+"--> Balanç: "+node_nou.h);
+		}
+		else
+			addElement(node_nou, raiz);
+		
+		//raiz.h = getTreeDepth(raiz);
+		
+		
+	//	System.out.println("\n\t\tIMPRIMIR AMB nº nodes: "+n);
+		imprr();
+		
+		return true;
+	}
+	
+	
+	private NodeB<Elem,Code> addElement( NodeB<Elem,Code> node_nou, NodeB<Elem,Code> node_pare)
+	{
+		int compare = node_nou.c.compareTo(node_pare.c);
+		
+		
+		
+	//	System.out.println(compare);
+		if(compare==0)// implica que son iguals aleshores...
+			{
+				System.out.println("Repetit!");
+				return node_pare;
+			}
+		if(compare > 0)	// implica que sigui mes petit
+			{
+				if(node_pare.FR == null)
+					{
+					compare = node_nou.c.compareTo(node_pare.c);
+					node_pare.FR = node_nou;
+					node_nou.DAD = node_pare;
+					gtd =3;
+					// equilibrar nodenou;
+			//		
+					n++;
+					//System.out.println("codi: "+node_nou.c+" --> balance: "+node_nou.h);
+					}
+				else
+					node_pare = addElement( node_nou, node_pare.FR);
+			}
+		else
+			{	
+				if(node_pare.FL == null)
+					{
+					compare = node_nou.c.compareTo(node_pare.c);
+					node_pare.FL = node_nou;
+					node_nou.DAD = node_pare;
+					gtd=1; 
+					// equilibrar nodenou;
+					n++;
+					//System.out.println("codi: "+node_nou.c+" --> balance: "+node_nou.h);
+					}	
+				else
+					node_pare = addElement( node_nou, node_pare.FL);
+			}
+		
+		
+		
+		
+	
+// SURT DE AFEGIR ara cada sortida es un nivell començo desde el nivell mes baix i anire pujant
+
+		 
+
+		
+		/*	
+		 
+		if(((gtd==1)||(gtd==3))&&(getTreeDepth(node_pare)>2))
+			{	
+				int pare = 0;
+					pare = (gtd > 0 ? 1 : 3);	// R = 1 || L = 3
+					if(pare == 1)	
+						if(node_pare.FR.FL != null)
+							pare = 2; 
+						else
+							if(pare == 3)
+								if(node_pare.FL.FR != null)
+									pare = 4;
+			
+				 Rotate(node_pare, pare);	// rotacions
+					
+					 
+			}
+		
+		
+		node_pare.h = calcularAltura( node_pare );
+	
+		//System.out.println("codi: "+node_pare.c+" --> balance: "+node_pare.h);
+		node_pare.h = getTreeDepth(node_pare);
+		
+		*/
+		return node_pare;
+		
+			
+	}
+	
+
+	
+	
+	  private int calcularAltura(NodeB<Elem,Code> actual ){
+	       if (actual == null)
+	            return -1;
+	       else
+	            return 1 + Math.max(calcularAltura(actual.FL), calcularAltura(actual.FR));
+	    }
+	
+/*************************************************************************/	
+	// OPERACIONS CONSULTORES
+	
+	// nodes fins a pare
+	public int getTreeDepth(NodeB<Elem,Code> nfap)	// només sabem quin es l'alçada absoluta de l'arbre
+	{
+	 
+		if((nfap.FR != null)&&(nfap.FL != null))
+			return 0;
+		
+		
+		
+		if((nfap.FL == null)&&(nfap.FR != null))
+			return  nfap.FR.h+1;
+		
+		
+		
+		if((nfap.FL != null)&&(nfap.FR == null))
+			return  nfap.FL.h+1;
+		
+		
+		if((nfap.FR != null)&&(nfap.FL != null))
+		return nfap.FL.h>nfap.FR.h ? nfap.FL.h+1:nfap.FR.h+1;
+		
+		
+		return -1;
+		
+		
+		 // l'alçada d'un dels fills incrementat en 1
+	}
+	
+	public void imprr(){
+        imprimir(raiz);
+    }
+
+    private void imprimir(NodeB<Elem,Code> node){
+        if ( node != null )
+        {
+        	if(imprimir == 1)
+        	{
+            imprimir(node.FR);
+           // System.out.println("["+ node.h +" \t"+(node.h<0 ? "<--" : "-->")+" "+ node.c +"]");
+           // System.out.println(node.FL+" FL <-"+node.c+"-> FR "+node.FR);
+            imprimir(node.FL);
+        	}else
+        	{
+        	imprimir(node.FR);
+            System.out.println(node.c);
+            imprimir(node.FL);
+        		
+        	}
+        }
+    }
+	
+	
+    public boolean isEmpty()
+    {
+    	return n==0;
+    }
+	
+
+/*************************************************************************/	
+	// OPERACIONS AUXILIARS  
+	
+	private NodeB<Elem,Code> Rotate(NodeB<Elem,Code> mig, int tipus )
+	{
+		NodeB<Elem,Code> aux = null;
+// sentit ens indica si es esquerra o dreta el pare
+	switch (tipus)
+	{
+	case 1:	
+			aux = rotarRR(mig);
+			aux.h = getTreeDepth(aux);
+			System.out.println("RR");
+		break;
+	case 2:
+			aux = rotarRL(mig);
+			System.out.println("RL");
+		break;
+	case 3:
+			aux = rotarLR(mig);
+			System.out.println("LR");
+		break;
+	case 4:
+			aux = rotarLL(mig);
+			System.out.println("LL");	
+		break;
+	default:
+		System.out.println("CAS ROTACIÓ ERRONI!");
+		
+	}
+	aux.h = getTreeDepth(aux);
+	if(aux.DAD == null)
+		raiz = aux;
+	return aux;
+
+	}
+		
+
+	public NodeB<Elem,Code> rotarLL(NodeB<Elem,Code> a)
+	{
+		NodeB<Elem,Code> c,aa,b;
+		aa	 = a.FL.FL;		// b
+		b	 = a.FL;			// d
+		c	 = a;				// a 
+		
+
+		
+		
+		b.DAD = c.DAD;
+		b.FL = aa;
+		b.FR = c;
+		
+		
+		c.FL = null;
+		
+		aa.DAD = b;
+		c.DAD = b;
+		
+		aa.h = 0;
+		c.h=0;
+		b.h=0;
+
+		aa.h = getTreeDepth(aa);
+		b.h= getTreeDepth(b);
+		c.h= getTreeDepth(c);
+		raiz.h = getTreeDepth(raiz);
+	//	a.h = getTreeDepth(a);	// fa falta un parell de linies
+	//	x.h = getTreeDepth(x);
+		return b;
+		
+	}
+
+	public NodeB<Elem,Code> rotarLR(NodeB<Elem,Code> a){		// OK
+		
+		
+		NodeB<Elem,Code> c,d,b;
+		
+		c	 = a.FL.FR;			// b
+		b	 = a.FL;			// d
+		d	 = a;				// a 
+		
+		
+		
+		
+		b.FR = null;
+		d.FL = null;
+		
+		
+		c.FL = b;
+		c.DAD = d.DAD;
+		c.FR = d;
+		
+		b.DAD = c;
+		d.DAD = c;
+		
+		c.h = 0;
+		d.h=0;
+		b.h=0;
+		
+		
+		d.h = getTreeDepth(d);
+		b.h= getTreeDepth(b);
+		c.h= getTreeDepth(c);
+		raiz.h = getTreeDepth(raiz);
+		/*
+		NodeB<Elem,Code> x;
+		x = a.FR;
+		a.FR = x.FL;
+		x.FL = a;
+		
+		a.h = getTreeDepth(a);	// fa falta un parell de linies
+		x.h = getTreeDepth(x);
+		*/
+		return c;
+	}
+
+	public NodeB<Elem,Code> rotarRR(NodeB<Elem,Code> a){
+		NodeB<Elem,Code> aa,c,b;
+		
+		c	 = a.FR.FR;		// a
+		b	 = a.FR;			// d
+		aa	 = a;				// c 
+		
+
+		aa.FR = null;
+		 
+		
+		b.FL = aa;
+		b.DAD = aa.DAD;
+		b.FR = c;
+		
+		aa.DAD = b;
+		c.DAD = b;
+		
+		aa.h = 0;
+		c.h=0;
+		b.h=0;
+		
+		aa.h = getTreeDepth(aa);
+		b.h= getTreeDepth(b);
+		c.h= getTreeDepth(c);
+		raiz.h = getTreeDepth(raiz);		
+	//	a.h = getTreeDepth(a);	// fa falta un parell de linies
+	//	x.h = getTreeDepth(x);
+		return b;
+		
+	}
+
+	public NodeB<Elem,Code> rotarRL(NodeB<Elem,Code> a){
+		
+		NodeB<Elem,Code> aa,d,b;
+		
+		b	 = a.FR.FL;		// b
+		d	 = a.FR;			// d
+		aa	 = a;				// a 
+		
+
+		aa.FR = null;
+		d.FL = null;
+		
+		b.FL = aa;
+		b.DAD = aa.DAD;
+		b.FR = d;
+		
+		aa.DAD = b;
+		d.DAD = b;
+		
+		aa.h = 0;
+		d.h=0;
+		b.h=0;
+				
+		aa.h = getTreeDepth(aa);
+		b.h= getTreeDepth(b);
+		d.h= getTreeDepth(d);
+		raiz.h = getTreeDepth(raiz);
+	//	a.h = getTreeDepth(a);	// fa falta un parell de linies
+	//	x.h = getTreeDepth(x);
+		return b;
+	}
+ 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

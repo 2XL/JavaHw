@@ -1,0 +1,79 @@
+package MAIN;
+
+
+import java.io.*;
+
+import javax.xml.parsers.*;
+
+import org.apache.commons.cli.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+//import TADsHash.*;
+import TADsGeneric.*;
+import TADsSerie.*;
+import EXCEPTION.*;
+
+public class HashUsers {																					// MAIN
+
+	public static void main(String[] args) throws ParseException, IOException, ParserConfigurationException, SAXException, FullShow, FullShowManager, SameId, NullList, VoidSearch  {
+		
+		BufferedReader teclat = new BufferedReader(new InputStreamReader(System.in));	// llegir una entra da per teclat
+																		
+		int dimServer=0, typeServer=0;				// especificar el tipus de serividor que farem servir i la capactiat maxima que tindra aquest servidor
+
+		
+		
+		
+		
+		typeServer = Integer.parseInt(teclat.readLine());	
+		
+		
+		int aux;
+		
+		String hk;
+		
+		do{
+			System.out.println("implementando HASHCODE");
+			
+			System.out.println("indique el correo ");
+			
+			
+			hk = teclat.readLine();
+			
+			
+			System.out.println(hk+" -> "+hk.hashCode());
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+System.out.println("salir = 0");			
+			
+			
+			
+			
+			
+		 aux = Integer.parseInt(teclat.readLine());
+			
+
+			
+		}while(aux !=0 );
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

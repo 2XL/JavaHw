@@ -1,0 +1,71 @@
+package TADsSerie;
+import EXCEPTION.*;
+
+public class ShowNO extends AbsShow {
+
+	// crear una serie no ordenada
+	public ShowNO (String name, int numepi)	// titol de la serie i el num maxim d'episodis
+	{	
+		title = name;
+		epi = new Episode [numepi]; 
+		numActual = 0;
+		numMax = numepi;
+		ple = false;
+		System.out.println("Serie Creat: ¡"+title+"?");
+	}
+//////////////////////////////////////////////////////////////	
+	public boolean addEpisode(Episode epis){
+		boolean existeix = this.EpiTrobat(epis);
+		// cal comprovar si existia previament
+		if((!ple)&&(!existeix)) // no ple i no existeix
+		{
+			//afegir episodi
+			
+			epi[numActual]=epis;
+			numActual++;
+			if (numActual == numMax)
+			ple = true;
+			return(true);		// insertat
+		}	
+		else{
+			if(!existeix)
+			{
+
+	try{throw new FullShow();}catch(FullShow e){e.getMessage();}
+			}else System.out.println("Episodi Existent!!!");}
+		return(false);			// no insertat
+	}
+//////////////////////////////////////////////////////////////	
+	public boolean removeEpisode(int id)
+	{
+		// suposant que la raiz es la posició o del vector
+		// aleshores [0,1,2,x,4,5,...,numepi]...
+		// suposant que x es l'episodi a esborrar, caldra esplaçar tots els episodis de la dreta una posicio capa l'esquerra
+		// una alternativa seria fer que les series també siguin linked list aleshores només caldria actualitzar uns punters
+		
+	
+		int i=0;
+
+		for(i=0; i<numActual;i++ )	// determinar posicio actual 
+			{
+			if(epi[i].getCode()==id) // determinem la posició actual
+			break;
+			}
+		
+//************************
+		//colocar datos
+	
+		int num=i;			// posicio index actual
+		
+				
+			if(numActual!=0)										//	restaurar capacitat
+					while(num<numActual)
+						{						//	retrocedir les posicions de la llista
+						epi[num]=epi[num+1];
+						num++;
+						}
+		epi[numActual]=null;	// anular l'ultima posicio del vector.
+
+		return true;
+	}
+}

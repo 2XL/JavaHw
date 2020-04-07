@@ -1,0 +1,97 @@
+package TADsHash;
+
+import java.util.Vector;
+
+public class UserManager
+{
+	
+
+	private int numUsers;
+	private int mida;
+	private HashTable<User, String> TH;
+	
+	
+	public UserManager(int mida)
+	{
+		numUsers = 0;
+		this.mida =mida;
+		TH = new HashTable<User, String>(mida);
+		// TAULA de HASH [CODI,ELEMENT(LINKEDLIST[CODI,USUARI])]
+			// EL CODI == CORREU... CALDRA PASARLO A INT A CADA PAS
+	}
+	
+	public void addUser(String clau, User usuari)
+	{
+		//TH.addElement(clau, usuari);
+		if(TH.addElement(clau, usuari))
+		{
+		numUsers++;
+		// redimentionar
+		System.out.println("Usuari afegit nº" + numUsers);
+			
+		}
+		else
+			System.out.println("WARNING: Usuari no trobat");
+	}
+	
+	
+	
+	
+	public void removeUser(String clau)
+	{
+		if(TH.removeElement(clau))
+		{
+		numUsers--;
+			System.out.println("Usuari esborrat");
+		}
+		else
+			System.out.println("WARNING: Usuari no trobat");
+	}
+	
+	//operacions consultaroes
+	
+	public int[] getUsedIndex()
+	{
+		int j=0;	// index actual de ocupats diferents
+		int[] rot = new int[mida];
+		for(int i=0; i<mida; i++)
+		{
+			
+			if(!TH.T.elementAt(i).isEmpty())
+			{	
+				rot[j] = i;
+				j++;
+			}
+		}
+		return rot;
+	}
+	
+	public User getUser(String clau)
+	{
+		return TH.getElement(clau);
+	}
+	
+	public Vector<User> getAllUsers()
+	{
+		return TH.getElements();
+	}
+	
+	public int getNumUser(){
+		return numUsers;
+	}
+	
+	public boolean getIsEmpty(){
+		return TH.isEmpty();
+	}
+	
+	public float getLF(){
+		return (numUsers*100)/mida;
+	}
+	
+	public int getNumUserFulla(int index){
+		return TH.T.elementAt(index).getNumElements();
+	}
+	
+	
+	
+}

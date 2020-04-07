@@ -1,0 +1,15 @@
+package TADs;
+
+
+public class NodeD<Elem, Code > 
+{
+	// dades a tractar
+	public Code c;							// identificador de l'element
+	public Elem e;							// l'element en concret
+	
+	// funcionene com a punters
+	public NodeD<Elem, Code > s;			// seguent element
+	public NodeD<Elem, Code > a;			// element anterior
+}
+
+//www.javaya.com.ar/detalleconcepto.php?codigo=122&inicio=40

@@ -1,0 +1,24 @@
+import Exceptions.*;
+
+
+public class ShowList extends AbsShow {
+
+	public ShowList (String name, int numepi) //
+	{
+		title = name;
+		epi = new Episode [numepi]; 
+		numActual = 0;
+		numMax = numepi;
+		ple = false;
+		System.out.println("Serie Creat: ¡"+title+"?");
+	}
+	
+	
+	public boolean addEpisode(Episode epis) {
+		
+		
+		
+		return false;
+	}
+
+}

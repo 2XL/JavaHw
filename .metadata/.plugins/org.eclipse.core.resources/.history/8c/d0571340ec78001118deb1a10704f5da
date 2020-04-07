@@ -1,0 +1,17 @@
+package TADs;
+
+public class NodeS<Elem, Code > extends Node<Elem, Code>
+{
+	public Code c;		// identificador de l'element
+	public Elem e;		// l'element en concret
+	public int s;			// seguent element
+	public int a;			// element anterior
+	
+	
+	//Node<Code, Element>
+	
+	// implementacio estatica o dinamica
+	// estatica ==  seran dos enters
+	// dinamica ==  dos punters
+	
+}

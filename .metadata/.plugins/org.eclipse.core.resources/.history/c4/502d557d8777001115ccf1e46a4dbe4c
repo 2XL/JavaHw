@@ -1,0 +1,13 @@
+package TADs;
+
+
+
+public class LinkedListD<Elem> extends LinkedList<Elem> {
+
+	
+		
+		
+		
+		
+
+}

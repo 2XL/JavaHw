@@ -1,0 +1,152 @@
+package TADs;
+
+
+import java.util.Vector;
+
+
+public class LinkedListS<Elem, Code> extends LinkedList<Elem, Code> {
+
+	// 1r element fantasma
+	private Vector<NodeS<Elem, Code>> info;	// us un element
+	private int SegLliure=0;	// posicio seguent lliure
+	private int Primitiu=-1;	// posicio inici
+	private int PDI=0;			// posicio actual
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	public LinkedListS(int midaM){		// estatica amb mida maxima... inicialitzar els variables
+		midaMax = midaM;
+		numElems=0;
+		
+		info = new Vector<NodeS<Elem, Code>>(midaMax);	
+		
+		
+		for (int i=0; i<midaMax;i++)
+		{
+		   info.insertElementAt(new NodeS<Elem, Code>(), i);		// inicialitzar les instancies de nodes
+		   // fer que els punters apuntin inicialment
+		   if (i!=midaMax-1)		// inicialitzar un linkers de seguents lliures
+			      info.elementAt(i).sig=i+1;
+		}
+		
+	}
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public boolean addElement(Code code, Elem e) {
+		if(numElems==midaMax)		// comprovar si existeix lloc lliure
+		{
+			System.out.println("EstaPLE");	// surt perque pila plena
+			return false;									
+		}
+		else
+		{
+			if(getElement(code)!=null)		// repetido
+				return false;
+			// tenim el cas de trobat aleshores no fer res
+			// en el cas de no trobat aleshores aprofitar l'index de seg_lliure i ficar l'element en aquell index
+			
+			
+			// anterior / element / codi / seguent //
+			info.elementAt(SegLliure).sig = Primitiu;		
+			
+			info.elementAt(SegLliure).codigo = code;		// actualitzar codi
+			info.elementAt(SegLliure).elemento = e;			// actualitzar element
+				// 
+			
+			
+			
+			
+			
+			
+			
+			int aux = info.elementAt(SegLliure).sig;		// carregar el seguent lliure en un variable aux
+			
+				// cal actualitzar anterior
+				// cal actualitzar 
+			
+			
+			
+			
+			SegLliure = info.elementAt(SegLliure).sig;
+			
+
+			numElems++;
+		}
+		return true;	
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+		
+	public boolean removeElement(Code code) {
+		
+		int i=0,j=Primitiu;
+		for (i=0; i<numElems;i++)			// j es la posicio actual
+			{	// determinar si l'element ja existia
+				j=info.elementAt(j).sig;	// se actualitza seguent casella
+				if(info.elementAt(j).codigo==code)
+				{
+					//trobat
+					
+					return true;
+				}
+			}								
+			
+
+		// no trobat
+		return false;
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	public Elem getElement(Code code) 
+	{
+		int i=0,j=0;
+		for (i=0; i<numElems;i++)			// j es la posicio actual
+			{	// determinar si l'element ja existia
+				j=info.elementAt(j).sig;	// se actualitza seguent casella
+				if(info.elementAt(j).codigo==code)
+						return null;					// surt perque s'ha trobat
+			}
+		
+	return info.elementAt(j).elemento;
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//Vector<NodeLinker<,>> info;
+	
+	
+
+	
+	
+	// a l'hora de treballar a la implementacio estatica:
+		// lo ideal:
+	
+			// 1 - CONSULTAR
+				// omplir tota la memoria del vector amb
+				// objectes de tipus Node_linked_List
+				// que estiguin buits
+// i despres accediu a aquests espais en les altres operacions.
+	// es a dir, que quan heu de afegir node, no haureu de fer mai un n= new Node,
+	// sino, simplement trobar una posicio buida i marcarla com ocupada i guardar-hi les dades
+	// quan feu un esborar node el que heu de fer es marcar la posicio com a lliure
+	// pero per eliminar el node no sirve...
+	
+	
+	
+	
+}

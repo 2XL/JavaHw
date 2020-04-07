@@ -1,0 +1,161 @@
+package MAIN;
+
+
+
+import java.util.Vector;
+import EXCEPTION.FullShow;
+import TADsSerie.*;
+
+public class Show extends AbsShow {
+
+	public OrderedTree<Episode, String> epi;
+	// public OrderedTree<String, LinkedListD<String, Episode>> epi[];
+	
+	// CONSTRUCTOR
+	
+	public Show (String nom, int numEpi)
+	{
+		title =nom;
+		numMax = numEpi;
+		numActual = 0;
+		epi = new OrderedTree<Episode, String>(numEpi);
+		ple = numEpi == 0 ? true : false;
+	}
+
+	
+	public boolean addEpisode(Episode epis) throws FullShow 
+	{
+		// cal comprovar si ja existia o si el sistema esta plé 
+		epi.addElement(epis.getTitle(), epis);
+		
+		numActual++;
+		if(numActual == numMax)
+			ple = true;
+		return false;
+	}
+	
+	public boolean getIsEmpty()
+	{
+		return epi.isEmpty();
+	}
+	
+	public void removeEpisode (String id)
+	{
+		
+		
+		if(epi.removeElement(id))
+		numActual--;
+		
+		
+	}
+
+	
+	// OPERACIONS CONSULTORES
+	
+	public void getEpisodeCodes(int tipus)
+	{
+		
+		Vector<Episode> llistat = epi.getElements();
+		
+		System.out.println("mostra:");
+		for(int i= 0; i<numActual; i++)
+		{
+		System.out.println(llistat.elementAt(i).getCode());
+		 
+		}
+		 
+	}
+	
+	public void getEpisode (String clau, int tipus)
+	{	
+		
+		if(epi.getElement(clau)==null)	
+			System.out.println("la clau no estroba en el sistema!");
+		else
+			System.out.println("Trobat: "+clau);
+		
+	}
+
+	
+	public int[] EpisodeCodesSeason ( int temporada )
+	{	// consultar series d'una mateixa temporada
+		int i=0;
+		Vector<Episode> llistat = epi.getElements();
+		int[] aux = new int[llistat.size()];
+		
+		int temp;
+		
+		while(i!=llistat.size()) 
+		{
+			temp = llistat.elementAt(i).getSeason();
+			if(temp==temporada)
+			{
+			aux[i]=llistat.elementAt(i).getCode();
+			System.out.println("--->    "+aux[i]);
+			}
+				if(temp>temporada)	// soposant que esta ordenat
+					break;
+			i++;
+		}
+		
+		if(i==0)
+			System.out.println("no s'ha trobat cap episodi!");
+		else
+			System.out.println("s'ha trobat "+i+" episodi!");
+
+		return aux;
+	}
+	
+	
+	public void getEpisodesBetween (String a, String b)
+	{
+		Vector<Episode> llistat = epi.getElementsBetween(a, b);	
+		System.out.println("mostra:");
+		int i =0;
+		while(i!=llistat.size())
+		{
+			
+		System.out.println(llistat.elementAt(i).getTitle());
+		i++;
+		 
+		}
+	}
+	
+	
+	public void getAllEpisodes()
+	{
+		Vector<Episode> llistat = epi.getElements();
+	
+	
+		System.out.println("mostra:");
+		for(int i= 0; i<numActual; i++)
+		{
+		System.out.println(llistat.elementAt(i).getTitle());
+		}
+		//return xow;
+		
+		// retorna tos els episodis de la serie
+		
+	}
+	
+	
+	
+	
+	
+	public void getTreeDepth()
+	{
+		System.out.println("Distancia de l'arrel fins la fulla més llunyana: "+epi.getTreeDepth());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+}

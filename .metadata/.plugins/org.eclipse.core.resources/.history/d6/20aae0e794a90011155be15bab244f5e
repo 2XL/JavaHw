@@ -1,0 +1,72 @@
+<series>
+<serie>
+    <id>2</id>
+    <titol>Alcatraz</titol>
+    <numepisodis>7</numepisodis>
+    <episodis>
+      <episodi>
+        <id>7</id>
+        <titol>Clarence Montgomery</titol>
+        <temporada>1</temporada>
+        <capitol>7</capitol>
+        <data>2/20/12</data>
+        <rating>6.4</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/clarence-montgomery-1742106/</url>
+      </episodi>
+      <episodi>
+        <id>6</id>
+        <titol>Guy Hastings</titol>
+        <temporada>1</temporada>
+        <capitol>6</capitol>
+        <data>2/13/12</data>
+        <rating>6.4</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/guy-hastings-1742104/</url>
+      </episodi>
+      <episodi>
+        <id>5</id>
+        <titol>Cal Sweeney</titol>
+        <temporada>1</temporada>
+        <capitol>5</capitol>
+        <data>2/6/12</data>
+        <rating>6.4</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/cal-sweeney-1742103/</url>
+      </episodi>
+      <episodi>
+        <id>4</id>
+        <titol>Johnny McKee</titol>
+        <temporada>1</temporada>
+        <capitol>4</capitol>
+        <data>1/30/12</data>
+        <rating>6.4</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/johnny-mckee-1742102/</url>
+      </episodi>
+      <episodi>
+        <id>3</id>
+        <titol>Kit Nelson</titol>
+        <temporada>1</temporada>
+        <capitol>3</capitol>
+        <data>1/23/12</data>
+        <rating>7.0</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/kit-nelson-1742101/</url>
+      </episodi>
+      <episodi>
+        <id>2</id>
+        <titol>Ernest Cobb</titol>
+        <temporada>1</temporada>
+        <capitol>2</capitol>
+        <data>1/16/12</data>
+        <rating>8.4</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/ernest-cobb-1742100/</url>
+      </episodi>
+      <episodi>
+        <id>1</id>
+        <titol>Pilot</titol>
+        <temporada>1</temporada>
+        <capitol>1</capitol>
+        <data>1/16/12</data>
+        <rating>8.5</rating>
+        <url>http://www.tv.com//shows/alcatraz-2012/pilot-1628040/</url>
+      </episodi>
+    </episodis>
+  </serie>
+  <serie>

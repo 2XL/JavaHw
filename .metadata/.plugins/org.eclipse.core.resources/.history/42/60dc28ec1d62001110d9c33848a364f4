@@ -1,0 +1,8 @@
+package Exceptions;
+
+public class FullShow extends Exception{
+
+public FullShow() {
+System.out.println("Serie Completa\n");
+}
+}

@@ -1,0 +1,106 @@
+package TADsHash;
+
+import TADsGeneric.*;
+
+public class User 
+{
+	static final int MAX_KEYS = 100;
+	private String name;	// nom de l'usuari
+	private String mail;	// email de l'usuari
+	private String[] keys;		// taula de keys de series favorites
+	
+	int nShow=0;	// contador de numero de series
+	
+	
+	
+	
+	// CONSTRUCTOR
+	public User(String nom , String mail, String[] keylist)
+	{
+		name = nom;
+		this.mail = mail;
+		nShow= keylist.length;
+		System.out.println(nom+" te ->"+nShow+" favorits");
+		keys = new String[MAX_KEYS];
+		for(int i= 0; i<keylist.length;i++)
+		keys[i] = keylist[i];
+		
+	// crea a la taula de hash una entrada nova
+	
+	}
+	
+	
+	public void addFavorite(String f)
+	{
+		if(nShow!= MAX_KEYS)
+		{
+			
+			keys[nShow] = f;
+			nShow++;
+		}
+	}
+	
+	public void removeFavorite(String f)
+	{
+		if(nShow!= 0)
+			
+			// mirar en quina posicio es troba;
+			
+			for(int i =0; i< nShow; i++)
+			{
+				if(keys[i].equals(f))
+				{
+					System.out.println("Trobat!!!!");
+					for(int j = i; j< nShow; j++)
+						keys[j] = keys[j+1];
+					nShow--;
+					break;
+				}else
+					System.out.println(i+" NO Trobat!!!!");
+				
+			}
+		
+	}
+	
+	// CONSULTORES
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getEmail()
+	{
+		return mail;
+	}
+	
+	public String[] getFavorites()
+	{
+
+		return keys;
+	}
+	
+	
+	public String[] getFavorites(ShowManager sm)
+	{
+		String[] xows = new String[nShow];
+		
+		for(int i = 0; i<nShow;i++)
+			{
+				xows[i] = sm.getShow(keys[i]);
+			}
+		// retorna una llista de noms de series de l'usuari especificat
+		return xows;
+	}
+	
+}
+// cal fer servir les implementacions dels tad's generics fetes a la practica 2'
+// fer linkedlists de user?
+
+// - programa principal que permeti fer les proves pertinents:
+	//- s'ha de poder preguntar al principi la mida maxima del servidor'
+	//- carregar les dades contingudes al fitxer:
+			//- serie_p2.xml
+			//- usuaris_p3.xml 
+			//- crear els objectes necesaris...
+	// mitjançant un menú ha de permetre realitzar la creacio i consulta de les dades de les series
+	// i dels episodis, afegir, esborrar i consultar usuaris i les seves series favorites;

@@ -1,0 +1,61 @@
+package TADs;
+
+
+public class LinkedListD<Elem, Code> extends LinkedList<Elem, Code> {
+
+	
+	private NodeD<Elem,Code> Raiz;
+			
+	public LinkedListD(int midaM)
+	{
+		Raiz = null;
+	}
+	
+	
+	
+
+	public boolean addElement(Code code, Elem nou) {
+		
+	
+		if(getElement(code)!=null)		// repetido
+					return false;
+				
+	/////////////////////////////////////////			
+			
+		NodeD< Elem,Code> n = new NodeD< Elem,Code>();
+		
+		n.c =code;
+		n.e = nou;
+		
+		if(Raiz == null)	// llista buida
+		{
+			n.s = n;
+			n.a = n;
+			Raiz = n;
+		}
+		else
+		{
+			NodeD<Elem,Code> l = Raiz.a;		// ultimo introducido
+			n.s = Raiz;	// siguiente de n = raiz
+			n.a = Raiz.a;	// anteior de n = ultimo
+			Raiz.a = n;
+			l.s = n;
+		}
+		
+		return false;
+	}
+
+	
+	public boolean removeElement(Code code) 
+	{
+	
+		
+		
+		
+		
+		return false;
+	}
+
+		
+
+}

@@ -1,0 +1,107 @@
+package TADs;
+
+import java.util.Vector;
+
+import TADsSerie.*;
+
+
+public class ShowManager 
+{		
+	private int nEle=0;
+	private int mMax;
+	public  LinkedList<ShowNO, String> SM;	
+// CONSTRUCTOR	
+	public ShowManager(int space, int type)	// reservar memoria...
+	{
+		nEle = 0;									// nombre d'elements que hiha actualment a la llista
+		mMax = space;								// la capactitat maxima de series
+		
+		
+	if(type==1)
+		SM = new LinkedListS<ShowNO, String> (space);		// inicialitzar una instancia de vector serie
+		else
+		SM = new LinkedListD<ShowNO, String>(space);
+		//int llista[] = new int[numActual];
+	
+	}
+////////////////////////////////////////////////////////////////
+	// setters
+	public boolean addShow (ShowNO s, String i )
+	{
+		if((nEle==mMax)||(SM.getElement(i)!=null))
+		return(false);	
+		
+		SM.addElement(i, s);		// afegir un node serie...
+		nEle++;	
+		return(true);		
+			
+	}
+/////////////////////////////////////////////////////////////////	
+	boolean addShowEpisode (String i, Episode episodi){
+	
+		SM.getElement(i).addEpisode(episodi);	
+		
+		
+		return true;
+	}	
+/////////////////////////////////////////////////////////////////
+	public int getNumShows()
+		{
+			return(nEle);
+		}
+//////////////////////////////////////////////////////////////	
+	public ShowNO[] getAllShows ()
+	{
+		
+		ShowNO[] xow = new ShowNO[nEle]; // aixo es una llista de series 
+		
+		Vector<Node<ShowNO, String>> llista = new Vector<Node<ShowNO, String>>(nEle);
+		
+		llista = SM.getElements();
+		
+		for(int i= 0; i<nEle; i++)
+		{
+		xow[i] = llista.elementAt(i).e;
+		}
+		return xow;
+	}
+//////////////////////////////////////////////////////////////	
+	public Episode[] getAllEpisodes (String ids)
+	{								// aixo es una llista de episodis de una mateixa seirie
+		System.out.println("*/*95-+-");
+		if(!SM.getElement(ids).epi.equals(null))
+		{
+			System.out.println("*/*95-+-5+**/4-*845*/*+5");
+			return SM.getElement(ids).epi;	// retorna la llista d'episodis
+		}
+		else
+			System.out.println("*/*95asdfa645894949494965-+-");
+			return(null);
+	}
+//////////////////////////////////////////////////////////////	
+	public Episode[] getEpisodesByYear (String id, String x)
+	{
+		Episode[] epa ;
+		String aux;
+		epa = getAllEpisodes(id);	// carregar la llista de tots els episodis d'una series
+		
+		Episode[] epe= new Episode[epa.length] ;
+		
+		
+		int j=0;
+		for (int i=0;i<epa.length; i++)
+		{
+			aux = epa[i].getDate();
+			aux = aux.split("/")[2];
+			if(aux == x)
+			{
+				epe[j] = epa[i];
+				j++;
+			}
+		}
+		
+		
+		return null;
+	}
+//////////////////////////////////////////////////////////////
+}

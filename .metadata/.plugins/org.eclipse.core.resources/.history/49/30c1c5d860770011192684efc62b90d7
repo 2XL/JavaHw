@@ -1,0 +1,9 @@
+package TADs;
+
+public interface EspecLinkedList<Elem> {
+	
+	
+	
+	
+
+}

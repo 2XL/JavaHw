@@ -1,0 +1,69 @@
+package TADsHash;
+
+import TADsGeneric.*;
+import TADsSerie.*;
+
+public class UserManager
+{
+	
+
+	private int numUsers;
+	
+	private HashTable<User, String> TH;
+	
+	
+	public UserManager(int mida)
+	{
+		numUsers = 0;
+		TH = new HashTable<User, String>(mida);
+		// TAULA de HASH [CODI,ELEMENT(LINKEDLIST[CODI,USUARI])]
+			// EL CODI == CORREU... CALDRA PASARLO A INT A CADA PAS
+	}
+	
+	
+	
+	
+	public void addUser(String clau, User usuari)
+	{
+		//TH.addElement(clau, usuari);
+		TH.addElement(clau, usuari);
+		
+		numUsers++;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void removeUser(String clau)
+	{
+		TH.removeElement(clau);
+		numUsers--;
+	}
+	
+	//operacions consultaroes
+	
+	public String getUser(String clau)
+	{
+		return "a";
+	}
+	
+	public String getAllUsers()
+	{
+		return "a";
+	}
+	
+	
+}

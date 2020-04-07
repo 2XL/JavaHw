@@ -1,0 +1,40 @@
+package TADs;
+
+
+
+public abstract class LinkedList implements EspecLinkedList {
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//AFEGIR
+// per les operacions d'afegir cal fer 4 comprovacions:
+//1r mirar si esta repetit
+// 2n aconseguir node de l'espai lliure
+	//3r guardar les dades al node
+		//4t enllaçar el node a l'estructura
+
+	//ESBORRAR
+// implementar els passos que ha dit a clase
+//1r trobar el node
+// 2n esborar el node
+	// 3r alliberar el node a espai lliure
+
+
+	
+	
+	
+	
+	
+	
+}

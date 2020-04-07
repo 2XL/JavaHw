@@ -1,0 +1,412 @@
+
+import java.io.*;
+
+import javax.xml.parsers.*;
+
+import org.apache.commons.cli.*;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+
+
+import Exceptions.*;
+
+public class Main {
+
+	public static void main(String[] args) throws ParseException, IOException, ParserConfigurationException, SAXException, VoidSearch, FullShow  {
+		
+		BufferedReader teclat = new BufferedReader(new InputStreamReader(System.in));	
+		//Object Serie;
+	// MAIN
+		int dimServer, typeServer;
+	
+		
+		
+	// llegir el tamany del servidor
+		System.out.println("Indiqui Dimensio del seridor: ");
+		dimServer = Integer.parseInt(teclat.readLine());
+		
+		System.out.println("tamany de servidor: "+dimServer);
+		
+	// preguntar el tipus de llista 
+		System.out.println("Indiqui el tipus de Gestio: 0 - 1 ");
+		System.out.println("\t 0 - llista no ordenada ");
+		System.out.println("\t 1 - llista ordenada ");
+		System.out.println("\t 2 - llista Java.util.collection ");
+		typeServer = Integer.parseInt(teclat.readLine());
+		
+		
+		
+		
+		
+		System.out.print("tipus escollit --> llista: ");
+		switch(typeServer){
+		case 0: System.out.println(" no ordenada"); break;
+		case 1: System.out.println(" ordenada"); break;
+		case 2: System.out.println(" JUC list"); break;
+		default: System.out.println("WARNING"); break; 
+		}
+	
+		/*********************************************
+		 *  crear
+		 * 			nova
+		 * 					instancia
+		 * 								de
+		 * 										serie
+		 * *******************************************/	
+		
+		
+		System.out.print("\n");
+		
+	/*************************************************************************************/	
+		
+		
+		
+		
+		String fileName = "xml/Data.xml";
+		/**************************************************************
+		 * Read XML file
+		 *
+		 *
+		 *
+		 *
+		 *
+		 **************************************************************/ 
+	// input list of the serie
+		File file = new File(fileName);
+		
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		
+		Document document = builder.parse(file);
+				
+	// Return ed element of XML file.
+		Element ed = document.getDocumentElement();
+
+				String aux =  new String();
+					Element auxElement;
+// declaracion de NODES
+		NodeList serieId, serieTitol, serienumepisodis, episodiList;
+	
+		// especification of the serie
+		
+		
+			// determinar id de la serie
+				serieId 	= ed.getElementsByTagName("id");
+		
+					auxElement = (Element) serieId.item(0);
+					aux = auxElement.getFirstChild().getNodeValue();
+						System.out.println("S-id \t\t"+aux);
+	
+							// determinar titol de la serie	
+								serieTitol 	= ed.getElementsByTagName("titol");
+									auxElement = (Element) serieTitol.item(0);
+									aux = auxElement.getFirstChild().getNodeValue();
+									System.out.println("S-titol \t"+aux);
+	
+									/************************************************/
+									/***************************************************/
+									/********************************************************/
+									// crear tipus de llista segons especificacio
+									// para usar uno o otro...	selecionar comentario...
+									//	if(typeServer==1)
+									
+									
+									
+	AbsShow Serie; 
+	/****************************************************/
+	// CREAR INSTANCIA DE SERIE	
+	/****************************************************/
+	if(typeServer==0)
+	Serie = new ShowNO(aux, dimServer);
+	else
+	if(typeServer==1)
+	Serie = new ShowO(aux, dimServer);
+	else
+	Serie = new ShowList(aux, dimServer);
+	
+
+		// determinar num episodi previst
+		serienumepisodis = ed.getElementsByTagName("numepisodis");
+			auxElement = (Element) serienumepisodis.item(0);
+				aux = auxElement.getFirstChild().getNodeValue();
+				System.out.println("S-nepi \t\t"+aux);	
+
+		
+	
+/********************************************* * *******************************************/		
+		
+		
+
+		
+		// episodi
+		episodiList = ed.getElementsByTagName("episodi");
+		
+		
+		if(episodiList != null && episodiList.getLength() > 0) 
+			{
+			
+			
+			System.out.println("Hello");
+			
+			/********* bucle crear instaancias de episodios de la serie*********/			
+			for (int i=0; i<episodiList.getLength(); i++)	
+				
+				{// System.out.println(i+1);
+				
+				Element episodi = (Element) episodiList.item(i);
+				
+		// id	
+				String id = new String();
+				NodeList idList = episodi.getElementsByTagName("id");
+				if(idList != null){
+					Element idElement = (Element)idList.item(0);
+					id = idElement.getFirstChild().getNodeValue();
+				}
+				
+				
+				//System.out.println(id);
+				
+				
+		// titol		
+				
+				String titol = new String();
+				NodeList titolList = episodi.getElementsByTagName("titol");
+				if(titolList != null){
+					Element titolElement = (Element)titolList.item(0);
+					titol = titolElement.getFirstChild().getNodeValue();
+				}
+				
+				
+				//System.out.println(titol);
+				
+		// season		
+				
+				String temporada = new String();
+				NodeList temporadaList = episodi.getElementsByTagName("temporada");
+				if(temporadaList != null){
+					Element temporadaElement = (Element)temporadaList.item(0);
+					temporada = temporadaElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(temporada);
+				
+		// episode
+				
+				String episode = new String();
+				NodeList episodeList = episodi.getElementsByTagName("capitol");
+				if(episodeList != null){
+					Element episodeElement = (Element)episodeList.item(0);
+					episode = episodeElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(episode);
+				
+				
+				
+		// date
+				String data = new String();
+				NodeList dataList = episodi.getElementsByTagName("data");
+				if(dataList != null){
+					Element dataElement = (Element)dataList.item(0);
+					data = dataElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(data);
+				
+				
+		// rating
+				
+				String rating = new String();
+				NodeList ratingList = episodi.getElementsByTagName("rating");
+				if(ratingList != null){
+					Element ratingElement = (Element)ratingList.item(0);
+					rating = ratingElement.getFirstChild().getNodeValue();
+				}
+				
+				//System.out.println(rating);
+				
+		// url
+				
+				String url = new String();
+				NodeList urlList = episodi.getElementsByTagName("url");
+				if(urlList != null){
+					Element urlElement = (Element)urlList.item(0);
+					url = urlElement.getFirstChild().getNodeValue();
+				}
+				
+				// crear nova instancia de episodi
+				/************************************************
+				 * crear
+				 * 			nova
+				 * 					instancia
+				 * 								de 
+				 * 										episodi
+				 ************************************************/
+				
+				//System.out.println(url);
+				Episode epi = new Episode(Integer.parseInt(id), titol, Integer.parseInt(temporada), Integer.parseInt(episode), data, Float.parseFloat(rating) , url);
+				
+				// lo anterior codi massa repeitiu -
+				// insertar episodi a la serie
+				
+				if(Serie.addEpisode(epi))				// afegir episodi a la serie
+					System.out.println("si");
+				else
+					System.out.println("no");
+				
+				
+				
+
+			}
+			System.out.println("finish curl "); // iteracio nº i
+		}
+		
+		System.out.println("finish reading "); // final bucle for
+	
+	
+	
+	// inicialitzar procesament... dades
+	
+	
+	System.out.println("initializing interface... ");
+	// interficie...
+	
+	int opcio = 0;
+	
+	
+	
+// ...............***..........***.............. //	
+	
+	
+	
+	
+	do{ 
+	// escollir opcio	
+	System.out.println("\n\nIndiqui opcio: ");
+		
+	System.out.println("\t 1 crear i insertar un episodi");
+	System.out.println("\t 2 consultar un episodi(getEpisode)");
+	System.out.println("\t 3 mostrar llistat de id(getEpisodeCodes)");
+	System.out.println("\t 4 mostrar llistat de id(getEpisodeCodesSeason)");
+	
+	System.out.println("\t 0 sortir");
+	
+	opcio = Integer.parseInt(teclat.readLine());
+	
+	
+	switch(opcio){
+		case 1:
+			if(Serie.numActual!=Serie.numMax){
+			System.out.println("\t\t 1 crear i insertar un episodi");
+			int var1, var3, var4;
+			String var2, var5, var7;
+			float var6;
+		
+		
+			try{
+			System.out.println("especifiqui les dades de l'episodi:\n codi - titol - temporada - episodi - data - rating - url");
+			var1 =  Integer.parseInt(teclat.readLine());
+			var2 = teclat.readLine();
+			var3 = Integer.parseInt(teclat.readLine());
+			var4 = Integer.parseInt(teclat.readLine());
+			var5 = teclat.readLine();
+			var6 = Float.parseFloat(teclat.readLine());
+			var7 = teclat.readLine();
+			Serie.addEpisode(new Episode(var1, var2, var3, var4, var5, var6, var7));
+			}catch(NumberFormatException e){}
+			
+		
+			
+			}
+			else System.out.println("Servidor ple"); // no puc insertar mes per capacitat
+			
+			break;
+		case 2:
+			try{
+			System.out.println("\t\t 2 consultar un episodi(getEpisode)");
+			System.out.println("especifiqui l'id de l'episodi");
+			int identitat =  Integer.parseInt(teclat.readLine());
+			Episode episodio = Serie.getEpisode(identitat);
+			System.out.println(episodio.getCode());
+			System.out.println(episodio.getTitle());
+			System.out.println(episodio.getSeason());
+			System.out.println(episodio.getEpisode());
+			System.out.println(episodio.getDate());
+			System.out.println(episodio.getRating());
+			System.out.println(episodio.getURL());
+			}catch(NullPointerException e){System.out.println("episodi no trobat");}
+			break;
+		case 3:
+			System.out.println("\t\t 3 mostrar llistat de id(getEpisodeCodes)");
+			System.out.println("...:");
+			int[] llistat = new int[Serie.numActual];
+			int i=0;
+			llistat = Serie.getEpisodeCodes();
+			for(i=0;i<llistat.length; i++)
+				System.out.println(llistat[i]);
+			break;
+		case 4:
+			System.out.println("\t\t 4 mostrar llistat de id(getEpisodeCodesSeason)");
+			System.out.println("especifiqui la temporada...:");
+			int temp =  Integer.parseInt(teclat.readLine());
+			int[] lisa = new int[Serie.numMax];
+			int j=0;
+			
+			
+			lisa = Serie.EpisodeCodesSeason(temp);
+			
+			while(j<lisa.length)
+			{
+				System.out.println(lisa[j]);
+				j++;
+			}
+			
+			break;
+		case 5:
+		
+		
+			break;
+		default:
+			
+			
+			break;
+	}
+	
+// 1	afegir episodi a serie
+	
+	
+// 2 	llista tots els id de la serie
+	
+	
+// 3 	retorna episodi amb el codi facilitat
+	
+	
+// 4	retorna llista de codis amb la temporada facilitat
+	
+
+	}while (opcio != 0);
+	
+// ........................................ //
+	
+	
+	System.out.println("finish execution ");
+	
+	
+	
+	
+}}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

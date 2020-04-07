@@ -1,0 +1,21 @@
+import Exceptions.*;
+
+public interface EspecShow {
+	
+	// operacions constructores
+	boolean addEpisode(Episode epis) throws FullShow;
+	
+	
+	// operacions consultores
+	int[] getEpisodeCodes();
+	Episode getEpisode(int codi);
+	int[] EpisodeCodesSeason(int tempo);
+	
+	
+	// operacions auxiliars
+	boolean EpiTrobat(Episode epis);
+	
+	
+	
+	
+}

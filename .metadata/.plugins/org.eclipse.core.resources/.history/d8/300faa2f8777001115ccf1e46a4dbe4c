@@ -1,0 +1,84 @@
+package TADs;
+
+import java.util.Vector;
+
+
+public abstract class LinkedList<Elem> implements EspecLinkedList<Elem> {
+	private int numEle;
+	Vector<Elem> info;
+	private int midaMax;
+
+	
+	
+	@Override
+	public boolean addElement(int code, Object nou) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean removeElement(int code) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Elem getLast() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Elem getElement(int code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Elem[] getElements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getNumElements() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//AFEGIR
+// per les operacions d'afegir cal fer 4 comprovacions:
+//1r mirar si esta repetit
+// 2n aconseguir node de l'espai lliure
+	//3r guardar les dades al node
+		//4t enllaçar el node a l'estructura
+
+	//ESBORRAR
+// implementar els passos que ha dit a clase
+//1r trobar el node
+// 2n esborar el node
+	// 3r alliberar el node a espai lliure
+
+
+	
+	
+	
+	
+	
+	
+}
